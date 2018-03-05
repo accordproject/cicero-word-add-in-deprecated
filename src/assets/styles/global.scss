@@ -1,0 +1,150 @@
+/* 
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
+@import 'flex.scss';
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+    @include flex-column();
+
+    &>div {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+
+.ms-welcome {
+    position: relative;
+    @include flex-column();
+    min-height: 500px;
+    min-width: 320px;
+    overflow-x: hidden;    
+    padding: 15px;    
+    margin:0px;
+    width: calc(100vw - 30px);
+    height: calc(100vh - 30px);
+    
+    &__progress,
+    &__header {
+        height:132px;
+        flex: 0 0 130px;
+
+        h1 {
+          padding-bottom:15px;  
+        }
+        p {
+            line-height: 1.7em;
+            padding-bottom:20px;
+        }
+    }
+
+    &__progress {
+        height: 100vh;
+        @include flex-column() {
+            @include flex-align(center, center);
+        }
+
+        h1 {
+            margin-bottom: 80px;
+        }
+
+        & .ms-Spinner {
+            .ms-Spinner-label {
+                color: #999;
+            }
+
+            .ms-Spinner-circle{
+                color: #333333;
+                border: 1.5px solid #CCC;
+                border-top-color: #333333;
+            }
+        }
+    }
+    &__pivot{
+        flex: 1 0 0;
+        overflow: auto;
+        overflow-x: hidden;
+        width: 100%;
+
+    }
+
+    &__main {
+        @include flex-column() {
+            @include flex-align(flex-start, center);
+        }
+        flex: 1 0 0;
+        padding: 30px 20px;
+
+        h2 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &__features {
+        list-style-type: none;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        &.ms-List .ms-ListItem {
+            padding: 0px;
+            padding-bottom: 20px;
+            @include flex-row() {
+                @include flex-align(flex-start, center);
+            }
+
+            & > .ms-Icon {
+                font-size: 14pt;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &__txtfield {
+        width: calc(100% - 30px)
+    }
+
+    &__action {
+        margin-top: 30px;
+    }
+
+    &__padfifteen{
+        padding-top: 15px;
+    
+    }
+    &__padten{
+        padding-bottom: 10px;
+    
+    }
+        &__padfourty{
+        padding-top: 40px;
+    }
+
+        &__padtwenty{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+}
+
+@media (min-width: 0) and (max-width: 350px) {
+    .ms-welcome__features {
+        width: 100%;
+    }
+}
