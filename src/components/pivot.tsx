@@ -3,6 +3,9 @@
  * See LICENSE in the project root for license information.
  */
 import * as React from 'react';
+import { getRTL } from 'office-ui-fabric-react/lib/Utilities';
+import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import {
     Pivot,
     PivotItem,
@@ -19,6 +22,8 @@ import { ToggleBasicExample } from './toggle';
 import { List } from 'office-ui-fabric-react/lib/List';
 import { DefaultButton, IButtonProps } from 'office-ui-fabric-react/lib/Button';
 import { Label } from 'office-ui-fabric-react/lib/Label';
+
+import './list.scss';
 
 export class ControlPivot extends React.Component<any, any> {
     constructor(props, context) {
@@ -67,7 +72,6 @@ export class ControlPivot extends React.Component<any, any> {
     public render() {
         return (
             <div className='ms-welcome__pivot'>
-                <div className='ms-font-xl ms-welcome__padtwenty'>Bindings</div>
                 <Label>{this.state.message}</Label>
                 <DefaultButton
                     data-automation-id='refresh'
@@ -79,9 +83,25 @@ export class ControlPivot extends React.Component<any, any> {
                     text='Bind'
                     onClick={ this._bindSelection.bind(this) }
                 />
-                <List items={ this.state.items } />
+                <List items={ this.state.items } 
+                onRenderCell={ this._onRenderCell }
+                />
             </div>
         );
     };
+
+    private _onRenderCell(item: any, index: number | undefined): JSX.Element {
+        return (
+          <div className='ms-ListBasicExample-itemCell' data-is-focusable={ true }>
+            <div className='ms-ListBasicExample-itemContent'>
+              <div className='ms-ListBasicExample-itemName'>{ item.name }</div>
+            </div>
+            <Icon
+              className='ms-ListBasicExample-chevron'
+              iconName={ getRTL() ? 'ChevronLeft' : 'ChevronRight' }
+            />
+          </div>
+        );
+      }
 };
 

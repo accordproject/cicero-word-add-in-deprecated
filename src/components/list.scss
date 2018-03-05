@@ -1,0 +1,49 @@
+@import './focusBorder';
+@import './i18n';
+
+:global {
+  .ms-ListBasicExample-itemCell {
+    @include focus-border();
+
+    min-height: 54px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid $bodyDividerColor;
+    display: flex;
+  }
+
+  .ms-ListBasicExample-itemCell:hover {
+    background: #EEE;
+  }
+
+  .ms-ListBasicExample-itemImage {
+    flex-shrink: 0;
+  }
+
+  .ms-ListBasicExample-itemContent {
+    @include margin-left(10px);
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  .ms-ListBasicExample-itemName {
+    //@include ms-font-xl;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ms-ListBasicExample-itemIndex {
+    font-size: 16;//$ms-font-size-s;
+    color: black;//$ms-color-neutralTertiary;
+    margin-bottom: 10px;
+  }
+
+  .ms-ListBasicExample-chevron {
+    align-self: center;
+    @include margin-left(10px);
+    color: black;//$ms-color-neutralTertiary;
+    font-size: 12;//$ms-font-size-l;
+    flex-shrink: 0;
+  }
+}
