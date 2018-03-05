@@ -34,6 +34,14 @@ cp cicero-word-add-in.xml /Users/<NAME>/Library/Containers/com.microsoft.Word/Da
 
 If the `wef` folder does not exist you need to create it.
 
+To activate the task pane:
+
+1. Launch Word
+2. Press the "Insert" tab
+3. Press the down arrow to the right of the "My Add-ins" button
+4. Select the "Accord Project" add-in
+5. Press the button to open the task pane and activate the add-in
+
 ## For Developers
 
  For more information, see [Sideload Office Add-ins for testing](https://dev.office.com/docs/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins). 

@@ -124,14 +124,14 @@
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Show code sample" />
-        <bt:String id="Contoso.Group1Label" DefaultValue="Fabric React" />
-        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Get started with Office UI Fabric React!" />
+        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Manage Smart Clauses" />
+        <bt:String id="Contoso.Group1Label" DefaultValue="Accord Project" />
+        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Manage the Accord Project Smart Clauses in your document." />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Click to show a Task pane" />
-        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show code sample' button to get started." />
+        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Manage Smart Clauses" />
+        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Smart Clause add-in loaded succesfully. Go to the HOME tab and click the 'Manage Smart Clauses' button to get started." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
