@@ -32,8 +32,15 @@ class BindingsList extends React.Component {
             const newItems = [];
 
             for (var i in asyncResult.value) {
-                const id = asyncResult.value[i].id;
-                newItems.push( {id: id, description: asyncResult.value[i].type});
+                let text = asyncResult.value[i].id;
+                let id = text;
+                let template = '';
+                const slashIndex = text.indexOf('/');
+                if(slashIndex>0) {
+                  template = text.substring(0,slashIndex);
+                  id = text.substring(slashIndex+1);
+                }
+                newItems.push( {id: id, template: template});
             }
             that.setState({items: newItems});
         }
@@ -41,8 +48,6 @@ class BindingsList extends React.Component {
             that.setState({message: 'Could not get bindings.'});
         }
     });
-
-//    this.setState({items: [{id: '1', description: 'text'}]});
   }
 
   removeBinding(id) {
@@ -63,12 +68,12 @@ class BindingsList extends React.Component {
         <List component="nav">
           {this.state.items.map(function(item,index) {
             return (
-              <ListItem button key={item.id} onClick={that.gotoBinding.bind(that, item.id)}>
+              <ListItem button key={item.id} onClick={that.gotoBinding.bind(that, item.template + '/' + item.id)}>
               <ListItemIcon>
                 <DescriptionIcon />
               </ListItemIcon>
-              <ListItemText primary={item.id} secondary={item.description}/>
-              <ListItemSecondaryAction onClick={that.removeBinding.bind(that, item.id)}>
+              <ListItemText secondary={item.id} primary={item.template}/>
+              <ListItemSecondaryAction onClick={that.removeBinding.bind(that, item.template + '/' + item.id)}>
                 <IconButton aria-label="Delete">
                   <DeleteIcon />
                 </IconButton>
