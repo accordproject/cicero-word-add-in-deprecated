@@ -9,8 +9,10 @@ import Dialog, {
   DialogTitle,
   withMobileDialog,
 } from 'material-ui/Dialog';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
-class BindDialog extends React.Component {
+class TemplateDialog extends React.Component {
 
   constructor(props) {
       super(props);
@@ -18,8 +20,6 @@ class BindDialog extends React.Component {
       this.state = {
         open: false,
         selectedText: '',
-        variables: [],
-        clauseId: '',
         templateId: ''
       };
     }
@@ -33,30 +33,9 @@ class BindDialog extends React.Component {
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
                 that.setState( {selectedText: asyncResult.value});
-                that.setState( {variables: that.getVariables(asyncResult.value)})
             }
         });
   };
-
-  getVariables(str) {
-    const regex = /\[(.*?)\]/g;
-    const variables = [];
-    var m;
-
-    while ((m = regex.exec(str)) !== null) {
-        // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
-        
-        // The result can be accessed through the `m`-variable.
-        m.forEach((match, groupIndex) => {
-            variables.push(match);
-        });
-    }
-
-    return variables;
-}
 
   handleCancel() {
     this.setState({ open: false });
@@ -64,47 +43,47 @@ class BindDialog extends React.Component {
 
   handleOk() {
     this.setState({ open: false });
-    const that = this;
-    window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
-        that.props.callback();
-    });
   };
-
-  handleClauseIdChange(event) {
-    this.setState({clauseId: event.target.value});
-  }
 
   handleTemplateIdChange(event) {
     this.setState({templateId: event.target.value});
   }
 
+  static getVariables(str) {
+    const regex = /\[(.*?)\]/g;
+    const variables = [];
+    let m;
+
+    while ((m = regex.exec(str)) !== null) {
+      // This is necessary to avoid infinite loops with zero-width matches
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
+
+      variables.push({key: m[1], type: 'String'});
+    }
+
+    return variables;
+  }
+
   render() {
     const { fullScreen } = this.props;
 
+    const properties = TemplateDialog.getVariables(this.state.selectedText);
     return (
       <div>
-        <Button onClick={this.handleClickOpen.bind(this)}>New...</Button>
+        <Button onClick={this.handleClickOpen.bind(this)}>New Template...</Button>
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{"Insert Smart Clause"}</DialogTitle>
+          <DialogTitle id="responsive-dialog-title">{"Create Smart Clause Template"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Bind the selected text to an existing template.
+              Create a new template from the selected text. Variables should be in [brackets].
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="clauseId"
-              label="Clause Identifier"
-              type="string"
-              fullWidth
-              value = {this.state.clauseId}
-              onChange={this.handleClauseIdChange.bind(this)}
-            />
             <TextField
               autoFocus
               margin="dense"
@@ -115,6 +94,25 @@ class BindDialog extends React.Component {
               value = {this.state.templateId}
               onChange={this.handleTemplateIdChange.bind(this)}
             />
+            <Paper elevation={0}>
+                <Typography variant="title" component="h4">
+                Variables
+                </Typography>
+            </Paper>
+            {properties.map((item, index) => {
+              return (
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="templateId"
+                  label={item.key}
+                  type="string"
+                  fullWidth
+                  value = {item.type}
+                />
+              );
+            })
+          }
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCancel.bind(this)} color="primary">
@@ -130,9 +128,9 @@ class BindDialog extends React.Component {
   }
 }
 
-BindDialog.propTypes = {
+TemplateDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
   callback: PropTypes.func.isRequired
 };
 
-export default withMobileDialog()(BindDialog);
+export default withMobileDialog()(TemplateDialog);

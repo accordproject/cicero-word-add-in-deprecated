@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import List, { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
 import DescriptionIcon from '@material-ui/icons/Description';
 import IconButton from 'material-ui/IconButton';
@@ -9,7 +8,7 @@ import { withTheme } from 'material-ui/styles'
 import BindDialog from './BindDialog';
 
 /**
- * Displays a list of the existing bindings in the document and allows a binding to be removed.
+ * Displays a list of the existing smart clause bindings in the document and allows a binding to be removed.
  */
 class BindingsList extends React.Component {
   constructor(props) {
@@ -40,7 +39,7 @@ class BindingsList extends React.Component {
                   template = text.substring(0,slashIndex);
                   id = text.substring(slashIndex+1);
                 }
-                newItems.push( {id: id, template: template});
+                newItems.push( {id: text, clauseId: id, templateId: template});
             }
             that.setState({items: newItems});
         }
@@ -65,15 +64,16 @@ class BindingsList extends React.Component {
     const that = this;
     return (
       <div className={this.props.theme.palette.background.paper}>
+        <BindDialog callback={that.getBindings.bind(that)}/>
         <List component="nav">
           {this.state.items.map(function(item,index) {
             return (
-              <ListItem button key={item.id} onClick={that.gotoBinding.bind(that, item.template + '/' + item.id)}>
+              <ListItem button key={item.id} onClick={that.gotoBinding.bind(that, item.id)}>
               <ListItemIcon>
                 <DescriptionIcon />
               </ListItemIcon>
-              <ListItemText secondary={item.id} primary={item.template}/>
-              <ListItemSecondaryAction onClick={that.removeBinding.bind(that, item.template + '/' + item.id)}>
+              <ListItemText secondary={item.clauseId} primary={item.templateId}/>
+              <ListItemSecondaryAction onClick={that.removeBinding.bind(that, item.id)}>
                 <IconButton aria-label="Delete">
                   <DeleteIcon />
                 </IconButton>
@@ -81,7 +81,6 @@ class BindingsList extends React.Component {
             </ListItem>);
           })}
         </List>
-        <BindDialog callback={that.getBindings.bind(that)}/>
       </div>);
   }
 }
