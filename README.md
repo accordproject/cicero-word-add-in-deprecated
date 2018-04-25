@@ -10,9 +10,9 @@ Use the Accord Project Microsoft Word add-in to manage the Smart Clauses in your
 
 ## Change History
 
-May 05, 2018:
+April 25, 2018:
 
-* Initial version.
+* Initial version: basic React based UI framework is in place. Binds text in the document to Smart Clauses. Introspects clauses to create templates (in progress).
 
 ## Prerequisites
 
