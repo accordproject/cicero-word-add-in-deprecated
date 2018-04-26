@@ -10,9 +10,9 @@ Use the Accord Project Microsoft Word add-in to manage the Smart Clauses in your
 
 ## Change History
 
-May 05, 2018:
+April 25, 2018:
 
-* Initial version.
+* Initial version: basic React based UI framework is in place. Binds text in the document to Smart Clauses. Introspects clauses to create templates (in progress).
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ May 05, 2018:
 1. Clone this repo using Git.
 2. Open a Node.js command prompt in the root folder of the project.
 2. Run `npm install` to install all dependencies.
-3. Run `npm start` to start the project. A browser window opens showing a partial UI.
+3. Run `export HTTPS=true && npm start` to start the project. A browser window opens showing a partial UI.
 4. To see the full UI, open Word and sideload the manifest.
 
 ```
