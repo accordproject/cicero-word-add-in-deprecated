@@ -7,8 +7,8 @@ import Typography from 'material-ui/Typography';
 import DescriptionIcon from '@material-ui/icons/Description';
 import CodeIcon from '@material-ui/icons/Code';
 
-import BindingsList from './BindingsList';
-import TemplateDialog from './TemplateDialog';
+import SmartClauseList from './SmartClauseList';
+import TemplateList from './TemplateList';
 
 function TabContainer(props) {
   return (
@@ -30,7 +30,10 @@ const styles = theme => ({
   },
 });
 
-class ScrollableTabsButtonPrevent extends React.Component {
+/**
+ * Manages the tabs across the top of the application
+ */
+class TopNavigation extends React.Component {
   state = {
     value: 0,
   };
@@ -51,15 +54,15 @@ class ScrollableTabsButtonPrevent extends React.Component {
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer><BindingsList/></TabContainer>}
-        {value === 1 && <TabContainer><TemplateDialog/></TabContainer>}
+        {value === 0 && <TabContainer><SmartClauseList/></TabContainer>}
+        {value === 1 && <TabContainer><TemplateList/></TabContainer>}
       </div>
     );
   }
 }
 
-ScrollableTabsButtonPrevent.propTypes = {
+TopNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ScrollableTabsButtonPrevent);
+export default withStyles(styles)(TopNavigation);

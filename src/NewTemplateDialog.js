@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from 'material-ui/Icon';
 import TextField from 'material-ui/TextField';
 import Dialog, {
   DialogActions,
@@ -12,7 +14,10 @@ import Dialog, {
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
-class TemplateDialog extends React.Component {
+/**
+ * Creates a new template based on the selected text
+ */
+class NewTemplateDialog extends React.Component {
 
   constructor(props) {
       super(props);
@@ -69,10 +74,12 @@ class TemplateDialog extends React.Component {
   render() {
     const { fullScreen } = this.props;
 
-    const properties = TemplateDialog.getVariables(this.state.selectedText);
+    const properties = NewTemplateDialog.getVariables(this.state.selectedText);
     return (
       <div>
-        <Button onClick={this.handleClickOpen.bind(this)}>New Template...</Button>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+          <AddIcon />
+        </Button>
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -82,7 +89,7 @@ class TemplateDialog extends React.Component {
           <DialogTitle id="responsive-dialog-title">{"Create Smart Clause Template"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Create a new template from the selected text. Variables should be in [brackets].
+              Create a new template from the selected text. Variables should be inside [square brackets].
             </DialogContentText>
             <TextField
               autoFocus
@@ -128,9 +135,9 @@ class TemplateDialog extends React.Component {
   }
 }
 
-TemplateDialog.propTypes = {
+NewTemplateDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
   callback: PropTypes.func.isRequired
 };
 
-export default withMobileDialog()(TemplateDialog);
+export default withMobileDialog()(NewTemplateDialog);

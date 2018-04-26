@@ -5,12 +5,16 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withTheme } from 'material-ui/styles'
 
-import BindDialog from './BindDialog';
+import NewSmartClauseDialog from './NewSmartClauseDialog';
 
 /**
- * Displays a list of the existing smart clause bindings in the document and allows a binding to be removed.
+ * Lists the existing smart clauses in the document and actions to:
+ * <ul>
+ *   <li>delete (remove the Office binding)
+ *   <li>goto
+ * </ul>
  */
-class BindingsList extends React.Component {
+class SmartClauseList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -64,7 +68,7 @@ class BindingsList extends React.Component {
     const that = this;
     return (
       <div className={this.props.theme.palette.background.paper}>
-        <BindDialog callback={that.getBindings.bind(that)}/>
+        <NewSmartClauseDialog callback={that.getBindings.bind(that)}/>
         <List component="nav">
           {this.state.items.map(function(item,index) {
             return (
@@ -85,4 +89,4 @@ class BindingsList extends React.Component {
   }
 }
 
-export default withTheme()(BindingsList);
+export default withTheme()(SmartClauseList);

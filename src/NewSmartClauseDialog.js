@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from 'material-ui/Icon';
 import TextField from 'material-ui/TextField';
 import Dialog, {
   DialogActions,
@@ -10,7 +12,11 @@ import Dialog, {
   withMobileDialog,
 } from 'material-ui/Dialog';
 
-class BindDialog extends React.Component {
+/**
+ * Links the currently selected text to a Template - creating a Smart Clause.
+ * MS Office 'Bindings' are used to maintain the link between the text and the template and clause id.
+ */
+class NewSmartClauseDialog extends React.Component {
 
   constructor(props) {
       super(props);
@@ -18,7 +24,6 @@ class BindDialog extends React.Component {
       this.state = {
         open: false,
         selectedText: '',
-        variables: [],
         clauseId: '',
         templateId: ''
       };
@@ -33,30 +38,9 @@ class BindDialog extends React.Component {
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
                 that.setState( {selectedText: asyncResult.value});
-                that.setState( {variables: that.getVariables(asyncResult.value)})
             }
         });
   };
-
-  getVariables(str) {
-    const regex = /\[(.*?)\]/g;
-    const variables = [];
-    var m;
-
-    while ((m = regex.exec(str)) !== null) {
-        // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-            regex.lastIndex++;
-        }
-        
-        // The result can be accessed through the `m`-variable.
-        m.forEach((match, groupIndex) => {
-            variables.push(match);
-        });
-    }
-
-    return variables;
-}
 
   handleCancel() {
     this.setState({ open: false });
@@ -83,7 +67,9 @@ class BindDialog extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleClickOpen.bind(this)}>New...</Button>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+          <AddIcon />
+        </Button>
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -130,9 +116,9 @@ class BindDialog extends React.Component {
   }
 }
 
-BindDialog.propTypes = {
+NewSmartClauseDialog.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
   callback: PropTypes.func.isRequired
 };
 
-export default withMobileDialog()(BindDialog);
+export default withMobileDialog()(NewSmartClauseDialog);
