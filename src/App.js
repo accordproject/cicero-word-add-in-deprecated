@@ -1,8 +1,9 @@
 import React from 'react';
-import TopNavigation from './TopNavigation';
 
-import { MuiThemeProvider } from 'material-ui/styles';
-import { withTheme } from 'material-ui/styles'
+// import auth0 from 'auth0-js';
+
+import Auth from './util/Auth';
+// import TopNavigation from './TopNavigation';
 
 /**
  * Root component for the app
@@ -10,18 +11,33 @@ import { withTheme } from 'material-ui/styles'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+
+    this.state = {
+      auth: new Auth,
+      user: null,
+      githubRepo: null,
+    };
+  }
+
+  componentDidMount() {
+    this.login();
+  }
+
+  login() {
+    this.state.auth.login();
+  }
+
+  logout() {
+    this.state.auth.logout();
   }
 
   render() {
     return (
-      <MuiThemeProvider theme={this.props.theme}>
-      <div>
-          <TopNavigation/>
+      <div className="app">
+        This is app
       </div>
-      </MuiThemeProvider>
     );
   }
 }
 
-export default withTheme()(App);
+export default App;
