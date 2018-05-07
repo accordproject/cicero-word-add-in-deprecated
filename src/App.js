@@ -78,7 +78,7 @@ class App extends React.Component {
         i++;
       }
     } else {
-      parameters.push ({ name: varName, dataType: data.value });
+      parameters.push({ name: varName, dataType: data.value });
     }
     this.setState({ parameters });
   }
@@ -95,7 +95,7 @@ class App extends React.Component {
         i++;
       }
     } else {
-      parameters.push ({ name: varName, sample: event.target.value });
+      parameters.push({ name: varName, sample: event.target.value });
     }
     this.setState({ parameters });
   }
@@ -145,6 +145,25 @@ class App extends React.Component {
             console.log('name of item', (title));
             console.log({ asyncResult });
           });
+
+          const parameters = this.state.parameters;
+          let paramObj = parameters.find((param) => param.name === variable.key);
+          if (paramObj) {
+            for (let i in parameters) {
+              if (parameters[i].name === variable.key) {
+                if(parameters[i].bindingIds) {
+                  parameters[i].bindingIds.push(title);
+                } else {
+                  parameters[i].bindingIds = [title];
+                }
+                break;
+              }
+              i++;
+            }
+          } else {
+            parameters.push({ name: variable.key, bindingIds: [title] });
+          }
+          this.setState({ parameters });
         }
       })
       .catch(function (error) {
@@ -209,7 +228,6 @@ class App extends React.Component {
       });
   }
 
-
   createBindingFromSelection() {
     const that = this;
     window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, {id: that.state.templateName}, function (asyncResult) {
@@ -253,8 +271,6 @@ class App extends React.Component {
         <Header>Create CTO Model</Header>
         <Form>
           {this.state.variableObjs.map((item, index) => {
-            console.log({item});
-            console.log({dataTypeOptions});
             return (
               <Form.Group key={index}>
                 <Label>{item.key}</Label>
@@ -276,6 +292,14 @@ class App extends React.Component {
           Submit
         </Button>
       </div>
+    );
+  }
+
+  get ctoModel() {
+    return(
+      `concept ${this.state.templateName} {
+      ${this.state.parameters.map((param) => `o ${param.dataType} ${param.name}`)}
+      }`
     );
   }
 
@@ -349,6 +373,10 @@ class App extends React.Component {
         {
           (!!this.state.variables.length) &&
           this.ctoModelForm
+        }
+        {
+          (!!this.state.parameters.length) &&
+          this.ctoModel
         }
       </div>
     );
