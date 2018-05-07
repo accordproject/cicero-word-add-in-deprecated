@@ -34,22 +34,22 @@ export default class CtoModelModal extends Component {
     this.setState({ samples: {...this.state.samples, [varName]: event.target.value }});
   }
 
-  static getVariables(str) {
-    const regex = /\[(.*?)\]/g;
-    const variables = [];
-    let m;
+  // static getVariables(str) {
+  //   const regex = /\[(.*?)\]/g;
+  //   const variables = [];
+  //   let m;
 
-    while ((m = regex.exec(str)) !== null) {
-      // This is necessary to avoid infinite loops with zero-width matches
-      if (m.index === regex.lastIndex) {
-        regex.lastIndex++;
-      }
+  //   while ((m = regex.exec(str)) !== null) {
+  //     // This is necessary to avoid infinite loops with zero-width matches
+  //     if (m.index === regex.lastIndex) {
+  //       regex.lastIndex++;
+  //     }
 
-      variables.push({key: m[1], type: 'String'});
-    }
+  //     variables.push({key: m[1], type: 'String'});
+  //   }
 
-    return variables;
-  }
+  //   return variables;
+  // }
 
   render() {
     return (
