@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Form, Header, Input, Label, Modal } from 'semantic-ui-react';
+import { Button, Form, Header, Label, Modal } from 'semantic-ui-react';
 
 export default class CtoModelModal extends Component {
   constructor(props) {
@@ -22,16 +22,17 @@ export default class CtoModelModal extends Component {
   }
 
   handleSubmit() {
+    console.log('State upon submit', this.state);
     this.setState({ open: false });
   }
 
-  // handleDataTypeChange(varName, event) {
-  //   this.setState({ dataTypes: {...this.state.dataTypes, varName: event.target.value }});
-  // }
+  handleDataTypeChange(varName, event) {
+    this.setState({ dataTypes: {...this.state.dataTypes, [varName]: event.target.value }});
+  }
 
-  // handleSampleChange(varName, event) {
-  //   this.setState({ dataTypes: {...this.state.samples, varName: event.target.value }});
-  // }
+  handleSampleChange(varName, event) {
+    this.setState({ samples: {...this.state.samples, [varName]: event.target.value }});
+  }
 
   static getVariables(str) {
     const regex = /\[(.*?)\]/g;
@@ -64,23 +65,23 @@ export default class CtoModelModal extends Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <Header>Creat CTO Model</Header>
+          <Header>Create CTO Model</Header>
           <Form>
             {this.props.variables.map((item) => {
               return (
                 <Form.Group key={item.id}>
                   <Label key={item.id}>{item.key}</Label>
-                  <Input
+                  <Form.Input
                     key={item.id}
                     type="text"
                     placeholder="Data Type"
-                    // onChange={() => this.handleDataTypeChange(item.key)}
+                    onChange={(event) => this.handleDataTypeChange(item.key, event)}
                   />
-                  <Input
+                  <Form.Input
                     key={item.id}
                     type="text"
                     placeholder="Sample input"
-                    // onChange={() => this.handleSampleChange(item.key)}
+                    onChange={(event) => this.handleSampleChange(item.key, event)}
                   />
                 </Form.Group>
               );

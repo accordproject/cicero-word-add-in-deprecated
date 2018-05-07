@@ -151,6 +151,7 @@ class App extends React.Component {
         >
         Render Selected Text
         </Button>
+        { this.state.selectedText }
         { this.state.selectedText &&
           <div className="bindText">
             <Input
