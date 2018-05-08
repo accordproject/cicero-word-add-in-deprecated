@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "cicero-word-add-in",
+  "name": "Cicero Template Word Add In",
   "icons": [
     {
       "src": "favicon.ico",

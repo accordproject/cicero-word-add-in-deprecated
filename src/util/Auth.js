@@ -17,7 +17,7 @@ class Auth {
   constructor() {
     this.dialog = null;
     this.Auth0AccountData = {
-      subdomain: 'clause.auth0.com',
+      subdomain: 'clause',
       clientID: 'leqMbtzqy8xfy5Nq0SnzFkMQU3qctQAV',
     };
 
@@ -34,19 +34,28 @@ class Auth {
   }
 
   login() {
-    console.log('Auth.login')
-    const fullUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + '/login.html';
+    console.log('Auth.login');
+    const loginUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + '/login.html';
+
+    // const auth0AuthorizeEndPoint = 'https://' + localStorage.getItem('Auth0Subdomain') + '.auth0.com/authorize/';
+    // const loginUrl = auth0AuthorizeEndPoint
+    //             + '?'
+    //             + 'response_type=token'
+    //             + '&client_id=' + localStorage.getItem('Auth0ClientID')
+    //             + '&redirect_uri=https://localhost:3000/loginCallback.html'
+    //             + '&scope=openid'
+    //             + '&connection=github';
 
     // height and width are percentages of the size of the screen.
     window.Office.context.ui.displayDialogAsync(
-      fullUrl,
-      {height: 45, width: 55, requireHTTPS: true},
+      loginUrl,
+      {height: 45, width: 25, requireHTTPS: true},
       (result) => {
-        console.log(result)
-        console.log(result.value)
+        console.log(result);
+        console.log(result.value);
         if (!result.value) return;
         this.dialog = result.value;
-        console.log(this.dialog)
+        console.log(this.dialog);
         this.dialog.addEventHandler(window.Office.WebExtension.EventType.DialogMessageReceived, this.processMessage);
       });
   }

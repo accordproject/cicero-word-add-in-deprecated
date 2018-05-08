@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
+    <link href="/assets/css/normalize.css" rel="stylesheet" />
+    <link href="/assets/css/prism.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.debug.js"></script>
+
+    <title>React App</title>
+    <script type="text/javascript">
+      (function () {
+        'use strict';
+        alert('hiya')
+
+        // Office.initialize must be called on every page where Office JavaScript is
+        // called. Other initialization code should go inside it.
+        Office.initialize = function() {
+          Office.context.ui.messageParent('we did it');
+          alert('hiyass')
+          document.addEventListener('DOMContentLoaded', function() {
+            alert('hi')
+            try {
+              // Auth0 adds its access token as a hash (#) value on the URL
+              var accessTokenForAuth0 = getHashStringParameter('access_token');
+
+              // Create the outcome message and send it to the task pane.
+              var messageObject = {outcome: 'success', auth0Token: accessTokenForAuth0};
+              var jsonMessage = JSON.stringify(messageObject);
+
+              // Tell the task pane about the outcome.
+              Office.context.ui.messageParent(jsonMessage);
+            }
+            catch(err) {
+
+              // Create the outcome message and send it to the task pane.
+              const messageObject = {outcome: 'failure', error: err.message};
+              const jsonMessage = JSON.stringify(messageObject);
+
+              // Tell the task pane about the outcome.
+              Office.context.ui.messageParent('message to parent ' + jsonMessage);
+            }
+          });
+        };
+
+        // Function to retrieve a hash string value when the hash
+        // value is structured like query parameters.
+        function getHashStringParameter(paramToRetrieve) {
+          var hash = location.hash.replace('#', '');
+          var params = hash.split('&');
+          for (var i = 0; i < params.length; i = i + 1) {
+            var singleParam = params[i].split('=');
+            if (singleParam[0] == paramToRetrieve)
+              return singleParam[1];
+          }
+        }
+      }());
+    </script>
+
+    <style>
+      .message-wrapper {
+        text-align: center;
+        position: relative;
+        height: 100%;
+      }
+
+      .message {
+        position: relative;
+        top: 50%;
+        margin: -50% auto auto;
+        max-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div class="message-wrapper">
+      <p class="message">Successfully authenticated. lease wait for this window to close, before continuing with the add-in.</p>
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
