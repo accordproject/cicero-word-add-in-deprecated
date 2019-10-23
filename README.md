@@ -29,7 +29,7 @@ April 25, 2018:
 4. To see the full UI, open Word and sideload the manifest.
 
 ```
-cp cicero-word-add-in.xml /Users/<NAME>/Library/Containers/com.microsoft.Word/Data/Documents/wef/
+CP cicero-word-add-in.xml /Users/<NAME>/Library/Containers/com.microsoft.Word/Data/Documents/wef/
 ```
 
 If the `wef` folder does not exist you need to create it.
