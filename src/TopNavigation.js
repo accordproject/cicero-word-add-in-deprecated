@@ -4,7 +4,9 @@ import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import DescriptionIcon from '@material-ui/icons/Description';
+import NoteIcon from '@material-ui/icons/Note';
+
+
 import CodeIcon from '@material-ui/icons/Code';
 
 import SmartClauseList from './SmartClauseList';
@@ -50,7 +52,7 @@ class TopNavigation extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange} scrollable scrollButtons="off">
-            <Tab label="Smart Clauses" icon={<DescriptionIcon />} />
+            <Tab label="Smart Clauses" icon={<NoteIcon />} />
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
         </AppBar>
