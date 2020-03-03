@@ -24,7 +24,7 @@ class NewSmartClauseDialog extends React.Component {
         open: false,
         selectedText: '',
         clauseId: '',
-        templateId: ''
+        templateId: '',
       };
     }
 
@@ -46,12 +46,24 @@ class NewSmartClauseDialog extends React.Component {
   };
 
   handleOk() {
-    this.setState({ open: false });
-    const that = this;
-    window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
+    if(this.state.clauseId !== '' && this.state.templateId !== '') {
+      this.setState({ open: false });
+      const that = this;
+      window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
+   }
   };
+
+  handleKeyPress(event) {
+    if(event.key === 'Enter')
+      this.handleOk();
+  }
+
+  handleKeyPressOpen(event) {
+    if(event.key === 'Enter') 
+      this.handleClickOpen();
+  }
 
   handleClauseIdChange(event) {
     this.setState({clauseId: event.target.value});
@@ -66,7 +78,7 @@ class NewSmartClauseDialog extends React.Component {
 
     return (
       <div>
-        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)} onKeyPress={this.handleKeyPressOpen.bind(this)}>
           <AddIcon />
         </Button>
         <Dialog
@@ -105,7 +117,7 @@ class NewSmartClauseDialog extends React.Component {
             <Button onClick={this.handleCancel.bind(this)} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleOk.bind(this)} color="primary" autoFocus>
+            <Button onClick={this.handleOk.bind(this)} onKeyPress={this.handleKeyPress.bind(this)} color="primary" autoFocus>
               Ok
             </Button>
           </DialogActions>
