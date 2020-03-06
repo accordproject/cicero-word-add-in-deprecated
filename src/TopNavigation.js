@@ -5,12 +5,10 @@ import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import NoteIcon from '@material-ui/icons/Note';
-
-
 import CodeIcon from '@material-ui/icons/Code';
-
 import SmartClauseList from './SmartClauseList';
 import TemplateList from './TemplateList';
+
 
 function TabContainer(props) {
   return (
@@ -50,6 +48,9 @@ class TopNavigation extends React.Component {
 
     return (
       <div className={classes.root}>
+        <AppBar position="static">
+          <Tab label="Cicero Word Plugin" />
+        </AppBar>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange} scrollable scrollButtons="off">
             <Tab label="Smart Clauses" icon={<NoteIcon />} />
