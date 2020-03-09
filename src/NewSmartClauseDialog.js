@@ -32,7 +32,7 @@ class NewSmartClauseDialog extends React.Component {
     const that = this;
     that.setState({ open: true });
 
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text, 
+    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
@@ -63,6 +63,7 @@ class NewSmartClauseDialog extends React.Component {
 
   render() {
     const { fullScreen } = this.props;
+    const { open,clauseId,templateId } = this.state;
 
     return (
       <div>
@@ -71,7 +72,7 @@ class NewSmartClauseDialog extends React.Component {
         </Button>
         <Dialog
           fullScreen={fullScreen}
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
@@ -87,7 +88,7 @@ class NewSmartClauseDialog extends React.Component {
               label="Clause Identifier"
               type="string"
               fullWidth
-              value = {this.state.clauseId}
+              value = {clauseId}
               onChange={this.handleClauseIdChange.bind(this)}
             />
             <TextField
@@ -97,7 +98,7 @@ class NewSmartClauseDialog extends React.Component {
               label="Template Identifier"
               type="string"
               fullWidth
-              value = {this.state.templateId}
+              value = {templateId}
               onChange={this.handleTemplateIdChange.bind(this)}
             />
           </DialogContent>
