@@ -96,7 +96,11 @@ class NewSmartClauseDialog extends React.Component {
               label="Clause Identifier"
               type="string"
               fullWidth
+<<<<<<< HEAD
               value = {clauseId}
+=======
+              value = {this.state.clauseId}
+>>>>>>> 235aeaacb333737dd5e1981fc6f20a94afdfdeb7
               onChange={this.handleClauseIdChange}
             />
             <TextField
@@ -106,7 +110,11 @@ class NewSmartClauseDialog extends React.Component {
               label="Template Identifier"
               type="string"
               fullWidth
+<<<<<<< HEAD
               value = {templateId}
+=======
+              value = {this.state.templateId}
+>>>>>>> 235aeaacb333737dd5e1981fc6f20a94afdfdeb7
               onChange={this.handleTemplateIdChange}
             />
           </DialogContent>

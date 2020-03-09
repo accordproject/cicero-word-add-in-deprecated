@@ -102,7 +102,11 @@ class NewTemplateDialog extends React.Component {
               label="Template Identifier"
               type="string"
               fullWidth
+<<<<<<< HEAD
               value = {templateId}
+=======
+              value = {this.state.templateId}
+>>>>>>> 235aeaacb333737dd5e1981fc6f20a94afdfdeb7
               onChange={this.handleTemplateIdChange}
             />
             <Paper elevation={0}>
