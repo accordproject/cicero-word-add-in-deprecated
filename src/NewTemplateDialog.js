@@ -37,7 +37,7 @@ class NewTemplateDialog extends React.Component {
     const that = this;
     that.setState({ open: true });
 
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text, 
+    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
@@ -77,7 +77,7 @@ class NewTemplateDialog extends React.Component {
 
   render() {
     const { fullScreen } = this.props;
-
+    const { open,templateId } = this.state;
     const properties = NewTemplateDialog.getVariables(this.state.selectedText);
     return (
       <div>
@@ -86,7 +86,7 @@ class NewTemplateDialog extends React.Component {
         </Button>
         <Dialog
           fullScreen={fullScreen}
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
@@ -102,7 +102,7 @@ class NewTemplateDialog extends React.Component {
               label="Template Identifier"
               type="string"
               fullWidth
-              value = {this.state.templateId}
+              value = {templateId}
               onChange={this.handleTemplateIdChange}
             />
             <Paper elevation={0}>
