@@ -26,9 +26,15 @@ class NewTemplateDialog extends React.Component {
         selectedText: '',
         templateId: ''
       };
+
+      this.bind = this.handleClickOpen.bind(this);
+      this.bind = this.handleCancel.bind(this);
+      this.bind = this.handleOk.bind(this);
+      this.bind = this.handleTemplateIdChange.bind(this);
+
     }
 
-  handleClickOpen() {
+  handleClickOpen = () => {
     const that = this;
     that.setState({ open: true });
 
@@ -41,15 +47,15 @@ class NewTemplateDialog extends React.Component {
         });
   };
 
-  handleCancel() {
+  handleCancel = () => {
     this.setState({ open: false });
   };
 
-  handleOk() {
+  handleOk = () => {
     this.setState({ open: false });
   };
 
-  handleTemplateIdChange(event) {
+  handleTemplateIdChange = (event) => {
     this.setState({templateId: event.target.value});
   }
 
@@ -76,7 +82,7 @@ class NewTemplateDialog extends React.Component {
     const properties = NewTemplateDialog.getVariables(this.state.selectedText);
     return (
       <div>
-        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
           <AddIcon />
         </Button>
         <Dialog
@@ -98,7 +104,7 @@ class NewTemplateDialog extends React.Component {
               type="string"
               fullWidth
               value = {templateId}
-              onChange={this.handleTemplateIdChange.bind(this)}
+              onChange={this.handleTemplateIdChange}
             />
             <Paper elevation={0}>
                 <Typography variant="title" component="h4">
@@ -121,10 +127,10 @@ class NewTemplateDialog extends React.Component {
           }
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleCancel.bind(this)} color="primary">
+            <Button onClick={this.handleCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleOk.bind(this)} color="primary" autoFocus>
+            <Button onClick={this.handleOk} color="primary" autoFocus>
               Ok
             </Button>
           </DialogActions>

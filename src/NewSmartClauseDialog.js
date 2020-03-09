@@ -26,9 +26,16 @@ class NewSmartClauseDialog extends React.Component {
         clauseId: '',
         templateId: ''
       };
+
+      this.bind = this.handleClickOpen.bind(this);
+      this.bind = this.handleCancel.bind(this);
+      this.bind = this.handleOk.bind(this);
+      this.bind = this.handleClauseIdChange.bind(this);
+      this.bind = this.handleTemplateIdChange.bind(this);
+      
     }
 
-  handleClickOpen() {
+  handleClickOpen = () => {
     const that = this;
     that.setState({ open: true });
 
@@ -41,11 +48,11 @@ class NewSmartClauseDialog extends React.Component {
         });
   };
 
-  handleCancel() {
+  handleCancel = () => {
     this.setState({ open: false });
   };
 
-  handleOk() {
+  handleOk = () => {
     this.setState({ open: false });
     const that = this;
     window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
@@ -53,11 +60,11 @@ class NewSmartClauseDialog extends React.Component {
     });
   };
 
-  handleClauseIdChange(event) {
+  handleClauseIdChange = (event) => {
     this.setState({clauseId: event.target.value});
   }
 
-  handleTemplateIdChange(event) {
+  handleTemplateIdChange = (event) => {
     this.setState({templateId: event.target.value});
   }
 
@@ -67,7 +74,7 @@ class NewSmartClauseDialog extends React.Component {
 
     return (
       <div>
-        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
           <AddIcon />
         </Button>
         <Dialog
@@ -89,7 +96,7 @@ class NewSmartClauseDialog extends React.Component {
               type="string"
               fullWidth
               value = {clauseId}
-              onChange={this.handleClauseIdChange.bind(this)}
+              onChange={this.handleClauseIdChange}
             />
             <TextField
               autoFocus
@@ -99,14 +106,14 @@ class NewSmartClauseDialog extends React.Component {
               type="string"
               fullWidth
               value = {templateId}
-              onChange={this.handleTemplateIdChange.bind(this)}
+              onChange={this.handleTemplateIdChange}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleCancel.bind(this)} color="primary">
+            <Button onClick={this.handleCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleOk.bind(this)} color="primary" autoFocus>
+            <Button onClick={this.handleOk} color="primary" autoFocus>
               Ok
             </Button>
           </DialogActions>
