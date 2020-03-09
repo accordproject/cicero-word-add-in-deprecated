@@ -71,6 +71,7 @@ class NewSmartClauseDialog extends React.Component {
 
   render() {
     const { fullScreen } = this.props;
+    const { open,clauseId,templateId } = this.state;
 
     return (
       <div>
@@ -79,7 +80,7 @@ class NewSmartClauseDialog extends React.Component {
         </Button>
         <Dialog
           fullScreen={fullScreen}
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >

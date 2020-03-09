@@ -50,6 +50,9 @@ class TopNavigation extends React.Component {
 
     return (
       <div className={classes.root}>
+      <AppBar position="static">
+        <Tab label="Cicero Word Add in"/>
+      </AppBar>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange} scrollable scrollButtons="off">
             <Tab label="Smart Clauses" icon={<NoteIcon />} />

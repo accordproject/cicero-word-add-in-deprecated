@@ -25,7 +25,7 @@ April 25, 2018:
 1. Clone this repo using Git.
 2. Open a Node.js command prompt in the root folder of the project.
 2. Run `npm install` to install all dependencies.
-3. Run `export HTTPS=true && npm start` to start the project. A browser window opens showing a partial UI.
+3. Run `npm start` to start the project. A browser window opens showing a partial UI.
 4. To see the full UI, open Word and sideload the manifest.
 
 ```
@@ -44,7 +44,7 @@ To activate the task pane:
 
 ## For Developers
 
- For more information, see [Sideload Office Add-ins for testing](https://dev.office.com/docs/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins). 
+ For more information, see [Sideload Office Add-ins for testing](https://dev.office.com/docs/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins).
 
 To understand how the project files are set up, and to learn how to create your own project using these components, see [Use Office UI Fabric React in Office Add-ins](https://dev.office.com/docs/add-ins/design/using-office-ui-fabric-react).
 
