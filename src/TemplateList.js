@@ -8,7 +8,7 @@ import NewTemplateDialog from './NewTemplateDialog';
 /**
  * Lists the templates in a template library
  */
-class TemplateList extends React.Component {
+class TemplateList extends Component {
   constructor(props) {
     super(props);
 

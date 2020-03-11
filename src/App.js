@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import TopNavigation from './TopNavigation';
 
 import { MuiThemeProvider } from 'material-ui/styles';
@@ -16,9 +16,9 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={this.props.theme}>
-      <div>
+        <Fragment>
           <TopNavigation/>
-      </div>
+        </Fragment>
       </MuiThemeProvider>
     );
   }
