@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -32,7 +32,7 @@ const styles = theme => ({
 /**
  * Manages the tabs across the top of the application
  */
-class TopNavigation extends React.Component {
+class TopNavigation extends Component {
   state = {
     value: 0,
   };
