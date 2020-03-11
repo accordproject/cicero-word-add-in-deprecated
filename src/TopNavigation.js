@@ -5,10 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import NoteIcon from '@material-ui/icons/Note';
-
-
 import CodeIcon from '@material-ui/icons/Code';
-
 import SmartClauseList from './SmartClauseList';
 import TemplateList from './TemplateList';
 

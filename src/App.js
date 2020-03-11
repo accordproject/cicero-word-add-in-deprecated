@@ -1,6 +1,5 @@
 import React from 'react';
 import TopNavigation from './TopNavigation';
-
 import { MuiThemeProvider } from 'material-ui/styles';
 import { withTheme } from 'material-ui/styles'
 

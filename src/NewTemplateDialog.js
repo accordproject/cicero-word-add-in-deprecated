@@ -36,12 +36,12 @@ class NewTemplateDialog extends React.Component {
 
   handleClickOpen = () => {
     const that = this;
+    const Office = window.Office;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
+    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
-            if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
+            if (asyncResult.status !== Office.AsyncResultStatus.Failed) {
                 that.setState( {selectedText: asyncResult.value});
             }
         });
