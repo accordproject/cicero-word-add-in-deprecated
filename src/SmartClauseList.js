@@ -21,9 +21,6 @@ class SmartClauseList extends React.Component {
       items: [],
       message: ''
     }
-    this.bind  = this.getBindings.bind(this);
-    this.bind  = this.gotoBinding.bind(this);
-    this.bind  = this.gotoBinding.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +53,7 @@ class SmartClauseList extends React.Component {
     });
   }
 
-  removeBinding = (id) => {
+  removeBinding(id) {
     const that = this;
     const bindings = window.Office.context.document.bindings;
     bindings.releaseByIdAsync(id, function (asyncResult) { 
@@ -64,7 +61,7 @@ class SmartClauseList extends React.Component {
     });  
   };
 
-  gotoBinding = (id) => {
+  gotoBinding(id) {
     const document = window.Office.context.document;
     document.goToByIdAsync(id, window.Office.GoToType.Binding);
   };
@@ -77,12 +74,12 @@ class SmartClauseList extends React.Component {
         <List component="nav">
           {this.state.items.map(function(item,index) {
             return (
-              <ListItem button key={item.id} onClick={that.gotoBinding.bind(item.id)}>
+              <ListItem button key={item.id} onClick={() => that.gotoBinding(item.id)}>
               <ListItemIcon>
                 <DescriptionIcon />
               </ListItemIcon>
               <ListItemText secondary={item.clauseId} primary={item.templateId}/>
-              <ListItemSecondaryAction onClick={that.removeBinding.bind(item.id)}>
+              <ListItemSecondaryAction onClick={() => that.removeBinding(item.id)}>
                 <IconButton aria-label="Delete">
                   <DeleteIcon />
                 </IconButton>

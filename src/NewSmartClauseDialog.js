@@ -56,7 +56,7 @@ class NewSmartClauseDialog extends React.Component {
     this.setState({ open: false });
     const that = this;
     const Office = window.Office;
-    const bindings = window.Office.context.document.bindings;
+    const bindings = Office.context.document.bindings;
         bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
