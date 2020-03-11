@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import List, { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
 import DescriptionIcon from '@material-ui/icons/Description';
 import IconButton from 'material-ui/IconButton';
@@ -13,7 +13,7 @@ import NewSmartClauseDialog from './NewSmartClauseDialog';
  *   <li>goto
  * </ul>
  */
-class SmartClauseList extends React.Component {
+class SmartClauseList extends Component {
   constructor(props) {
     super(props);
 
@@ -58,7 +58,7 @@ class SmartClauseList extends React.Component {
     const bindings = window.Office.context.document.bindings;
     bindings.releaseByIdAsync(id, function (asyncResult) { 
       that.getBindings();
-    });  
+    });
   };
 
   gotoBinding(id) {
