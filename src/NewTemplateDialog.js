@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,7 +16,7 @@ import Typography from 'material-ui/Typography';
 /**
  * Creates a new template based on the selected text
  */
-class NewTemplateDialog extends React.Component {
+class NewTemplateDialog extends Component {
 
   constructor(props) {
       super(props);

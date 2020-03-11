@@ -25,7 +25,7 @@
 
   <!--If you plan to submit this add-in to the Office Store, uncomment the SupportUrl element below-->
   <!-- <SupportUrl DefaultValue="http://accordproject.org"> -->
-  
+
   <!--End Basic Settings. -->
 
   <!--Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office client version does not support add-in commands. -->

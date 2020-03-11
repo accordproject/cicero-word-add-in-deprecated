@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -15,7 +15,7 @@ import Dialog, {
  * Links the currently selected text to a Template - creating a Smart Clause.
  * MS Office 'Bindings' are used to maintain the link between the text and the template and clause id.
  */
-class NewSmartClauseDialog extends React.Component {
+class NewSmartClauseDialog extends Component {
 
   constructor(props) {
       super(props);

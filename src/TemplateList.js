@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import DescriptionIcon from '@material-ui/icons/Description';
 import { withTheme } from 'material-ui/styles'
@@ -8,7 +8,7 @@ import NewTemplateDialog from './NewTemplateDialog';
 /**
  * Lists the templates in a template library
  */
-class TemplateList extends React.Component {
+class TemplateList extends Component {
   constructor(props) {
     super(props);
 
