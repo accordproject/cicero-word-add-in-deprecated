@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import DescriptionIcon from '@material-ui/icons/Description';
 import { withTheme } from 'material-ui/styles'
