@@ -1,52 +1,65 @@
-import React, {Component} from 'react';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import DescriptionIcon from '@material-ui/icons/Description';
-import { withTheme } from 'material-ui/styles'
+import React, { useState, useEffect } from 'react';
+import { TemplateLibrary } from '@accordproject/cicero-ui';
+import loadTemplates from './loadTemplates';
 
-import NewTemplateDialog from './NewTemplateDialog';
+export const AP_THEME = {
+    DARK_BLUE: '#141F3C',
+    DARK_BLUE_MEDIUM: '#182444',
+    DARK_BLUE_LIGHT: '#1E2D53',
+    CYAN: '#19C6C7',
+    GRAY: '#B9BCC4',
+    LIGHT_GRAY: '#F0F0F0',
+    WHITE: '#FFFFFF',
+};
 
-/**
- * Lists the templates in a template library
- */
-class TemplateList extends Component {
-  constructor(props) {
-    super(props);
+export const TEMPLATE_LIBRARY = {
+    HEADER_TITLE: '#939EBA',
+    ACTION_BUTTON: AP_THEME.CYAN,
+    ACTION_BUTTON_BACKGROUND: AP_THEME.DARK_BLUE_MEDIUM,
+    ACTION_BUTTON_BORDER: '#7B8FAD',
+    TEMPLATE_BACKGROUND: AP_THEME.DARK_BLUE_LIGHT,
+    TEMPLATE_TITLE: AP_THEME.GRAY,
+    TEMPLATE_DESCRIPTION: AP_THEME.WHITE,
+};
 
-    this.state = {
-      templates: [],
-      message: ''
-    }
-  }
+const libraryProps = {
+    HEADER_TITLE: TEMPLATE_LIBRARY.HEADER_TITLE,
+    ACTION_BUTTON: TEMPLATE_LIBRARY.ACTION_BUTTON,
+    ACTION_BUTTON_BG: TEMPLATE_LIBRARY.ACTION_BUTTON_BACKGROUND,
+    ACTION_BUTTON_BORDER: TEMPLATE_LIBRARY.ACTION_BUTTON_BORDER,
+    TEMPLATE_BACKGROUND: TEMPLATE_LIBRARY.TEMPLATE_BACKGROUND,
+    TEMPLATE_TITLE: TEMPLATE_LIBRARY.TEMPLATE_TITLE,
+    TEMPLATE_DESCRIPTION: TEMPLATE_LIBRARY.TEMPLATE_DESCRIPTION,
+    TEMPLATES_HEIGHT: 'calc(100vh - 250px)',
+};
 
-  componentDidMount() {
-    this.getTemplates();
-  }
+const mockImport = () => { console.log('import'); };
+const mockUpload = () => { console.log('upload'); };
+const mockNewTemplate = () => { console.log('new template'); };
+const mockAddToContract = () => { console.log('add to contract'); };
 
-  getTemplates() {
-    const newItems = [];
-    newItems.push( {id: 'org.accordproject.foo', description: 'This is a test template'});
-    newItems.push( {id: 'org.accordproject.bar', description: 'This is another test template'});
-    this.setState({templates: newItems});
-  }
+export const LibraryComponent = (props) => {
 
-  render() {
-    const that = this;
+    const [templates, setTemplates] = useState( null );
+
+    async function load() {
+        let templates = await loadTemplates();
+        setTemplates(templates)
+      }
+
+    useEffect( () => {
+        load();
+    }, []);
+
     return (
-      <div className={this.props.theme.palette.background.paper}>
-        <NewTemplateDialog callback={that.getTemplates.bind(that)}/>
-        <List component="nav">
-          {this.state.templates.map(function(item,index) {
-            return (
-              <ListItem button key={item.id}>
-              <ListItemIcon>
-                <DescriptionIcon />
-              </ListItemIcon>
-              <ListItemText secondary={item.description} primary={item.id}/>
-            </ListItem>);
-          })}
-        </List>
-      </div>);
-  }
-}
+        <TemplateLibrary
+            templates={templates}
+            upload={mockUpload}
+            import={mockImport}
+            addTemp={mockNewTemplate}
+            addToCont={mockAddToContract}
+            libraryProps={libraryProps}
+        />);
+};
 
-export default withTheme()(TemplateList);
+export default LibraryComponent;
