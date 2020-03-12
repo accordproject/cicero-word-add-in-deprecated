@@ -30,9 +30,9 @@ class NewSmartClauseDialog extends Component {
 
   handleClickOpen = () => {
     const that = this;
+    const document = window.Office.context.document;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
+    document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
@@ -48,7 +48,9 @@ class NewSmartClauseDialog extends Component {
   handleOk = () => {
     this.setState({ open: false });
     const that = this;
-    window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
+    const Office = window.Office;
+    const bindings = Office.context.document.bindings;
+        bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
   };
