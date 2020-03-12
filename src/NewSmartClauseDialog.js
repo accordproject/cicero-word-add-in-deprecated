@@ -82,6 +82,7 @@ class NewSmartClauseDialog extends Component {
               Bind the selected text to an existing template.
             </DialogContentText>
             <TextField
+              required
               autoFocus
               margin="dense"
               id="clauseId"
@@ -92,6 +93,7 @@ class NewSmartClauseDialog extends Component {
               onChange={this.handleClauseIdChange}
             />
             <TextField
+              required
               autoFocus
               margin="dense"
               id="templateId"
