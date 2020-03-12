@@ -26,12 +26,6 @@ class NewTemplateDialog extends Component {
         selectedText: '',
         templateId: ''
       };
-
-      this.bind = this.handleClickOpen.bind(this);
-      this.bind = this.handleCancel.bind(this);
-      this.bind = this.handleOk.bind(this);
-      this.bind = this.handleTemplateIdChange.bind(this);
-
     }
 
   handleClickOpen = () => {

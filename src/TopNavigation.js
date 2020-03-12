@@ -50,7 +50,7 @@ class TopNavigation extends Component {
 
     return (
       <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Tab label="Cicero Word Add in"/>
       </AppBar>
         <AppBar position="static">
