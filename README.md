@@ -57,6 +57,7 @@ To understand how the project files are set up, and to learn how to create your 
 * JavaScript APIs used in this project to interact with the objects and metadata in a Word document
 
 You can use two sets of JavaScript APIs to interact with the objects and metadata in a Word document.
-The first one is [Common API](https://docs.microsoft.com/en-us/javascript/api/office?view=word-js-preview) and the second one is the [Word JavaScript API](https://docs.microsoft.com/en-us/javascript/api/word?view=word-js-preview). For this project we are using [Word JavaScript API](https://docs.microsoft.com/en-us/javascript/api/word?view=word-js-preview). It is a strongly-typed object model that is used to create Word add-ins that target Word 2016 or above.
+The first one is [Common API](https://docs.microsoft.com/en-us/javascript/api/office?view=word-js-preview) and
+the second one is the [Word JavaScript API](https://docs.microsoft.com/en-us/javascript/api/word?view=word-js-preview).
 
- 
+For this project we are using [Common Api](https://docs.microsoft.com/en-us/javascript/api/office?view=word-js-preview). It is a strongly-typed object model that is used to create Word add-ins that target Word 2016 or above.
