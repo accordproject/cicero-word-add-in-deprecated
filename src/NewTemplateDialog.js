@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,7 +16,7 @@ import Typography from 'material-ui/Typography';
 /**
  * Creates a new template based on the selected text
  */
-class NewTemplateDialog extends React.Component {
+class NewTemplateDialog extends Component {
 
   constructor(props) {
       super(props);
@@ -26,22 +26,16 @@ class NewTemplateDialog extends React.Component {
         selectedText: '',
         templateId: ''
       };
-
-      this.bind = this.handleClickOpen.bind(this);
-      this.bind = this.handleCancel.bind(this);
-      this.bind = this.handleOk.bind(this);
-      this.bind = this.handleTemplateIdChange.bind(this);
-
     }
 
   handleClickOpen = () => {
     const that = this;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
+    const Office = window.Office;
+    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
-            if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
+            if (asyncResult.status !== Office.AsyncResultStatus.Failed) {
                 that.setState( {selectedText: asyncResult.value});
             }
         });

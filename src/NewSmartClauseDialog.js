@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -15,7 +15,7 @@ import Dialog, {
  * Links the currently selected text to a Template - creating a Smart Clause.
  * MS Office 'Bindings' are used to maintain the link between the text and the template and clause id.
  */
-class NewSmartClauseDialog extends React.Component {
+class NewSmartClauseDialog extends Component {
 
   constructor(props) {
       super(props);
@@ -26,20 +26,13 @@ class NewSmartClauseDialog extends React.Component {
         clauseId: '',
         templateId: ''
       };
-
-      this.bind = this.handleClickOpen.bind(this);
-      this.bind = this.handleCancel.bind(this);
-      this.bind = this.handleOk.bind(this);
-      this.bind = this.handleClauseIdChange.bind(this);
-      this.bind = this.handleTemplateIdChange.bind(this);
-      
     }
 
   handleClickOpen = () => {
     const that = this;
+    const document = window.Office.context.document;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
+    document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
@@ -55,7 +48,9 @@ class NewSmartClauseDialog extends React.Component {
   handleOk = () => {
     this.setState({ open: false });
     const that = this;
-    window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
+    const Office = window.Office;
+    const bindings = Office.context.document.bindings;
+        bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
   };
@@ -89,6 +84,7 @@ class NewSmartClauseDialog extends React.Component {
               Bind the selected text to an existing template.
             </DialogContentText>
             <TextField
+              required
               autoFocus
               margin="dense"
               id="clauseId"
@@ -99,6 +95,7 @@ class NewSmartClauseDialog extends React.Component {
               onChange={this.handleClauseIdChange}
             />
             <TextField
+              required
               autoFocus
               margin="dense"
               id="templateId"

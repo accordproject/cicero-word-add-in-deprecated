@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -35,7 +35,7 @@ const styles = theme => ({
 /**
  * Manages the tabs across the top of the application
  */
-class TopNavigation extends React.Component {
+class TopNavigation extends Component {
   state = {
     value: 0,
   };
@@ -50,7 +50,7 @@ class TopNavigation extends React.Component {
 
     return (
       <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Tab label="Cicero Word Add in"/>
       </AppBar>
         <AppBar position="static">
