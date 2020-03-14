@@ -31,11 +31,11 @@ class NewTemplateDialog extends Component {
   handleClickOpen = () => {
     const that = this;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text,
+    const Office = window.Office;
+    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
-            if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
+            if (asyncResult.status !== Office.AsyncResultStatus.Failed) {
                 that.setState( {selectedText: asyncResult.value});
             }
         });
