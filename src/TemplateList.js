@@ -89,11 +89,11 @@ const addToContract = async (templateIndex, templateUri) => {
 
 export const LibraryComponent = (props) => {
 
-        const templateLibrary = new TemplateLibrary();
         const [templates, setTemplates] = useState(null);
         const [templateIndex, setTemplateIndex] = useState(null);
         useEffect(() => {
            async function load() {
+                const templateLibrary = new TemplateLibrary();
                 const templateIndex = await templateLibrary
                     .getTemplateIndex({
                         latestVersion: true,
@@ -103,7 +103,7 @@ export const LibraryComponent = (props) => {
                 setTemplates(Object.values(templateIndex))
             };
             load();
-        },[templateLibrary]);
+        },[]);
 
         return ( 
             <TemplateLibraryComponent 
