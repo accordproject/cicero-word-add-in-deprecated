@@ -84,7 +84,7 @@ const addToContract = async (templateIndex, templateUri) => {
         return context.sync();
     })
     .catch(function (error) {
-        console.log("Error: " + Json.stringify(error));
+        console.log("Error: " + JSON.stringify(error));
     });
 };
 
