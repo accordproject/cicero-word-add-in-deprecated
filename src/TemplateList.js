@@ -76,6 +76,9 @@ const addToContract = async (templateIndex, templateUri) => {
         const dom = ciceroMarkTransformer.fromMarkdown( sample );
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
+        let doc=context.document;
+        doc.body.insetText("Insert some text", "Start");
+        doc.body.getRange("Whole").select();
         var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
         blankParagraph.insertHtml(html, "End");
         return context.sync();
