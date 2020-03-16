@@ -12,6 +12,10 @@ import {
 
 import {CiceroMarkTransformer} from '@accordproject/markdown-cicero';
 import {HtmlTransformer} from '@accordproject/markdown-html';
+import { Button } from '@material-ui/core';
+import { spacing } from '@material-ui/system';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 export const AP_THEME = {
     DARK_BLUE: '#141F3C',
@@ -54,11 +58,87 @@ const mockNewTemplate = () => {
     console.log('new template');
 };
 
+//spacing for buttons
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(),
+    },
+  },
+}));
+
 
 /**
  * Adds the text of a template to the MS Word document.
  * @param {*} templateUri
  */
+
+ function insertParagraph() {
+   Word.run(function (context) {
+     var docBody = context.document.body;
+     docBody.insertParagraph("You can click here to add this text later it will come from AP Template :)", "Start");
+     return context.sync();
+   })
+   .catch(function (error) {
+     console.log("Error: " + JSON.stringify(error));
+   });
+ }
+
+ function applyStyle() {
+ Word.run(function (context) {
+   var firstParagraph = context.document.body.paragraphs.getFirst();
+   firstParagraph.styleBuiltIn = Word.Style.intenseReference;
+
+   return context.sync();
+ })
+ .catch(function (error) {
+   console.log("Error: " + error);
+ });
+}
+
+function applyCustomStyle() {
+ Word.run(function (context) {
+   var lastParagraph = context.document.body.paragraphs.getLast();
+   lastParagraph.style = "MyCustomStyle";
+
+   return context.sync();
+ })
+ .catch(function (error) {
+   console.log("Error: " + error);
+ });
+}
+
+
+function replaceText() {
+  Word.run(function (context) {
+    var doc = context.document;
+    var originalRange = doc.getSelection();
+    originalRange.insertText("to", "from");
+
+    return context.sync();
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+}
+
+function changeFont() {
+  Word.run(function (context) {
+    var secondParagraph = context.document.body.paragraphs.getFirst().getNext();
+    secondParagraph.font.set({
+      name: "Courier New",
+      bold: true,
+      size: 18
+    });
+
+    return context.sync();
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+}
+
+
 const addToContract = async (templateIndex, templateUri) => {
 
     /* global Word */
@@ -66,6 +146,7 @@ const addToContract = async (templateIndex, templateUri) => {
         // load the template
         console.log(templateIndex);
         console.log(templateUri);
+        let docBody=context.document.body;
         const hashIndex = templateUri.indexOf('#');
         const templateId = templateUri.substring(5, hashIndex);
         const templateDetails = templateIndex[templateId];
@@ -76,11 +157,11 @@ const addToContract = async (templateIndex, templateUri) => {
         const dom = ciceroMarkTransformer.fromMarkdown( sample );
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
-        let doc=context.document;
-        doc.body.insetText("Insert some text", "Start");
-        doc.body.getRange("Whole").select();
-        var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
+        docBody.insetText("Insert some text", "Start");
+        docBody.getRange("Whole").select();
+        var blankParagraph = docBody.paragraphs.getLast().insertParagraph("check here", "After");
         blankParagraph.insertHtml(html, "End");
+        blankParagraph.styleBuiltIn = Word.Style.intenseReference;
         return context.sync();
     })
     .catch(function (error) {
@@ -108,7 +189,13 @@ export const LibraryComponent = (props) => {
             load();
         }, []);
 
+        const classes = useStyles();
         return (
+          <div className={classes.root}>
+            <Button variant="contained" color="primary" onClick={insertParagraph}>Insert Some Text</Button>
+            <Button variant="contained" color="primary" onClick={applyCustomStyle}>FIND AND REPLACE</Button>
+            <Button variant="contained" color="primary" onClick={applyStyle}>Apply Style</Button>
+            <Button variant="contained" color="primary" onClick={changeFont}>Change Font</Button>
             <TemplateLibraryComponent
                 templates = {templates}
                 upload = {mockUpload}
@@ -116,7 +203,10 @@ export const LibraryComponent = (props) => {
                 addTemp = {mockNewTemplate}
                 addToCont = { (templateUri) => addToContract(templateIndex, templateUri)}
                 libraryProps = {libraryProps}
-            />);
+            />
+          </div>
+
+      );
         };
 
         export default LibraryComponent;
