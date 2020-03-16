@@ -13,7 +13,6 @@ import {
 import {CiceroMarkTransformer} from '@accordproject/markdown-cicero';
 import {HtmlTransformer} from '@accordproject/markdown-html';
 import { Button } from '@material-ui/core';
-import { spacing } from '@material-ui/system';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -171,29 +170,32 @@ const addToContract = async (templateIndex, templateUri) => {
 
 export const LibraryComponent = (props) => {
 
+        const templateLibrary = new TemplateLibrary();
         const [templates, setTemplates] = useState(null);
         const [templateIndex, setTemplateIndex] = useState(null);
+
+        async function load() {
+            const templateIndex = await templateLibrary
+                .getTemplateIndex({
+                    latestVersion: true,
+                    ciceroVersion
+                });
+            setTemplateIndex(templateIndex);
+            setTemplates(Object.values(templateIndex))
+        }
+
         useEffect(() => {
-           async function load() {
-                const templateLibrary = new TemplateLibrary();
-                const templateIndex = await templateLibrary
-                    .getTemplateIndex({
-                        latestVersion: true,
-                        ciceroVersion
-                    });
-                setTemplateIndex(templateIndex);
-                setTemplates(Object.values(templateIndex))
-            };
             load();
-        },[]);
+        }, []);
 
         const classes = useStyles();
         return (
           <div className={classes.root}>
             <Button variant="contained" color="primary" onClick={insertParagraph}>Insert Some Text</Button>
-            <Button variant="contained" color="primary" onClick={applyCustomStyle}>FIND AND REPLACE</Button>
+            <Button variant="contained" color="primary" onClick={replaceText}>FIND AND REPLACE</Button>
             <Button variant="contained" color="primary" onClick={applyStyle}>Apply Style</Button>
             <Button variant="contained" color="primary" onClick={changeFont}>Change Font</Button>
+            <Button variant="contained" color="primary" onClick={applyCustomStyle}>Apply Custom Style</Button>
             <TemplateLibraryComponent
                 templates = {templates}
                 upload = {mockUpload}
