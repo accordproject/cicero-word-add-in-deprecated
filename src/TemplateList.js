@@ -12,9 +12,12 @@ import {
 
 import {CiceroMarkTransformer} from '@accordproject/markdown-cicero';
 import {HtmlTransformer} from '@accordproject/markdown-html';
+<<<<<<< HEAD
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+=======
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93
 
 export const AP_THEME = {
     DARK_BLUE: '#141F3C',
@@ -56,6 +59,7 @@ const mockUpload = () => {
 const mockNewTemplate = () => {
     console.log('new template');
 };
+<<<<<<< HEAD
 
 //spacing for buttons
 const useStyles = makeStyles(theme => ({
@@ -65,10 +69,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
+=======
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93
 
 
 /**
  * Adds the text of a template to the MS Word document.
+<<<<<<< HEAD
  * @param {*} templateUri
  */
 
@@ -156,24 +163,40 @@ function changeFont() {
 }
 
 
+=======
+ * @param {*} templateUri 
+ */
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93
 const addToContract = async (templateIndex, templateUri) => {
 
     /* global Word */
     Word.run(async function (context) {
+<<<<<<< HEAD
         // load the template
         console.log(templateIndex);
         console.log(templateUri);
         let docBody=context.document.body;
+=======
+
+        // load the template
+        console.log(templateIndex);
+        console.log(templateUri);
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93
         const hashIndex = templateUri.indexOf('#');
         const templateId = templateUri.substring(5, hashIndex);
         const templateDetails = templateIndex[templateId];
         const url = templateDetails.url;
         const template = await Template.fromUrl(url);
         const sample = template.getMetadata().getSample();
+<<<<<<< HEAD
+=======
+
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93
         const ciceroMarkTransformer = new CiceroMarkTransformer();
         const dom = ciceroMarkTransformer.fromMarkdown( sample );
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
+<<<<<<< HEAD
         docBody.insetText("Insert some text", "Start");
         docBody.getRange("Whole").select();
         var blankParagraph = docBody.paragraphs.getLast().insertParagraph("check here", "After");
@@ -183,11 +206,20 @@ const addToContract = async (templateIndex, templateUri) => {
     })
     .catch(function (error) {
         console.log("Error: " + JSON.stringify(error));
+=======
+        var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
+        blankParagraph.insertHtml(html, "End");
+        return context.sync();
+    })
+    .catch(function (error) {
+        console.log("Error: " + error);
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93
     });
 };
 
 export const LibraryComponent = (props) => {
 
+<<<<<<< HEAD
         const templateLibrary = new TemplateLibrary();
         const [templates, setTemplates] = useState(null);
         const [templateIndex, setTemplateIndex] = useState(null);
@@ -228,3 +260,33 @@ export const LibraryComponent = (props) => {
         };
 
 export default LibraryComponent;
+=======
+        const [templates, setTemplates] = useState(null);
+        const [templateIndex, setTemplateIndex] = useState(null);
+        useEffect(() => {
+           async function load() {
+                const templateLibrary = new TemplateLibrary();
+                const templateIndex = await templateLibrary
+                    .getTemplateIndex({
+                        latestVersion: true,
+                        ciceroVersion
+                    });
+                setTemplateIndex(templateIndex);
+                setTemplates(Object.values(templateIndex))
+            };
+            load();
+        },[]);
+
+        return ( 
+            <TemplateLibraryComponent 
+                templates = {templates}
+                upload = {mockUpload}
+                import = {mockImport}
+                addTemp = {mockNewTemplate}
+                addToCont = { (templateUri) => addToContract(templateIndex, templateUri)}
+                libraryProps = {libraryProps}
+            />);
+        };
+
+        export default LibraryComponent;
+>>>>>>> cc0117cb5ceaddf1aa34f8afad69f73dec6ada93

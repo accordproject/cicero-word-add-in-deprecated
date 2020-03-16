@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -15,7 +15,7 @@ import Dialog, {
  * Links the currently selected text to a Template - creating a Smart Clause.
  * MS Office 'Bindings' are used to maintain the link between the text and the template and clause id.
  */
-class NewSmartClauseDialog extends React.Component {
+class NewSmartClauseDialog extends Component {
 
   constructor(props) {
       super(props);
@@ -28,11 +28,11 @@ class NewSmartClauseDialog extends React.Component {
       };
     }
 
-  handleClickOpen() {
+  handleClickOpen = () => {
     const that = this;
+    const document = window.Office.context.document;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text, 
+    document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
@@ -41,37 +41,40 @@ class NewSmartClauseDialog extends React.Component {
         });
   };
 
-  handleCancel() {
+  handleCancel = () => {
     this.setState({ open: false });
   };
 
-  handleOk() {
+  handleOk = () => {
     this.setState({ open: false });
     const that = this;
-    window.Office.context.document.bindings.addFromSelectionAsync(window.Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
+    const Office = window.Office;
+    const bindings = Office.context.document.bindings;
+        bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
   };
 
-  handleClauseIdChange(event) {
+  handleClauseIdChange = (event) => {
     this.setState({clauseId: event.target.value});
   }
 
-  handleTemplateIdChange(event) {
+  handleTemplateIdChange = (event) => {
     this.setState({templateId: event.target.value});
   }
 
   render() {
     const { fullScreen } = this.props;
+    const { open,clauseId,templateId } = this.state;
 
     return (
       <div>
-        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
           <AddIcon />
         </Button>
         <Dialog
           fullScreen={fullScreen}
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
@@ -81,31 +84,33 @@ class NewSmartClauseDialog extends React.Component {
               Bind the selected text to an existing template.
             </DialogContentText>
             <TextField
+              required
               autoFocus
               margin="dense"
               id="clauseId"
               label="Clause Identifier"
               type="string"
               fullWidth
-              value = {this.state.clauseId}
-              onChange={this.handleClauseIdChange.bind(this)}
+              value = {clauseId}
+              onChange={this.handleClauseIdChange}
             />
             <TextField
+              required
               autoFocus
               margin="dense"
               id="templateId"
               label="Template Identifier"
               type="string"
               fullWidth
-              value = {this.state.templateId}
-              onChange={this.handleTemplateIdChange.bind(this)}
+              value = {templateId}
+              onChange={this.handleTemplateIdChange}
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleCancel.bind(this)} color="primary">
+            <Button onClick={this.handleCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleOk.bind(this)} color="primary" autoFocus>
+            <Button onClick={this.handleOk} color="primary" autoFocus>
               Ok
             </Button>
           </DialogActions>
