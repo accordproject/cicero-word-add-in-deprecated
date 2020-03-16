@@ -84,75 +84,75 @@ const useStyles = makeStyles(theme => ({
  }
 
  function applyStyle() {
- Word.run(function (context) {
-   var firstParagraph = context.document.body.paragraphs.getFirst();
-   firstParagraph.styleBuiltIn = Word.Style.intenseReference;
+     Word.run(function (context) {
+       var firstParagraph = context.document.body.paragraphs.getFirst();
+       firstParagraph.styleBuiltIn = Word.Style.intenseReference;
 
-   return context.sync();
- })
- .catch(function (error) {
-   console.log("Error: " + error);
- });
+       return context.sync();
+     })
+     .catch(function (error) {
+       console.log("Error: " + error);
+     });
 }
 
 function applyCustomStyle() {
- Word.run(function (context) {
-   var lastParagraph = context.document.body.paragraphs.getLast();
-   lastParagraph.style = "MyCustomStyle";
+    Word.run(function (context) {
+     var lastParagraph = context.document.body.paragraphs.getLast();
+     lastParagraph.style = "MyCustomStyle";
 
-   return context.sync();
- })
- .catch(function (error) {
-   console.log("Error: " + error);
- });
+     return context.sync();
+   })
+   .catch(function (error) {
+     console.log("Error: " + error);
+   });
 }
 
 
 
 function replaceText() {
-  Word.run(function (context) {
-    var doc = context.document;
-    var originalRange = doc.getSelection();
-    originalRange.insertText("many", "Replace");
+    Word.run(function (context) {
+      var doc = context.document;
+      var originalRange = doc.getSelection();
+      originalRange.insertText("many", "Replace");
 
-    return context.sync();
-  })
-  .catch(function (error) {
-    console.log("Error: " + error);
-  });
+      return context.sync();
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
 }
 
 
 function replaceallsimilarText() {
-  Word.run(function (context) {
-    var paragraph = context.document.body.paragraphs.getLast();
-    var ranges= paragraph.search('to',{matchCase:true, igonreSpace:true});
-    context.load(ranges);
-    return context.sync().then(()=>{
-      for(var i=0;i<ranges.items.length;i++){
-        ranges.items[i].insertText("to",'hello');
-      }
-    });
+    Word.run(function (context) {
+      var paragraph = context.document.body.paragraphs.getLast();
+      var ranges= paragraph.search('to',{matchCase:true, igonreSpace:true});
+      context.load(ranges);
+      return context.sync().then(()=>{
+        for(var i=0;i<ranges.items.length;i++){
+          ranges.items[i].insertText("to",'hello');
+        }
+      });
   })
   .catch(function (error) {
-    console.log("Error: " + error);
+      console.log("Error: " + error);
   });
 }
 
 function changeFont() {
-  Word.run(function (context) {
-    var secondParagraph = context.document.body;
-    secondParagraph.font.set({
-      name: "Courier New",
-      bold: true,
-      size: 18
-    });
+    Word.run(function (context) {
+      var secondParagraph = context.document.body;
+      secondParagraph.font.set({
+        name: "Courier New",
+        bold: true,
+        size: 18
+      });
 
-    return context.sync();
-  })
-  .catch(function (error) {
-    console.log("Error: " + error);
-  });
+      return context.sync();
+    })
+    .catch(function (error) {
+      console.log("Error: " + error);
+    });
 }
 
 
@@ -208,24 +208,23 @@ export const LibraryComponent = (props) => {
 
         const classes = useStyles();
         return (
-          <div className={classes.root}>
-            <Button variant="contained" color="primary" onClick={insertParagraph}>Insert Some Text</Button>
-            <Button variant="contained" color="primary" onClick={replaceText}>FIND AND REPLACE</Button>
-            <Button variant="contained" color="primary" onClick={applyStyle}>Apply Style</Button>
-            <Button variant="contained" color="primary" onClick={changeFont}>Change Font</Button>
-            <Button variant="contained" color="primary" onClick={applyCustomStyle}>Apply Custom Style</Button>
-            <Button variant="contained" color="primary" onClick={replaceallsimilarText}>Find And Replace text</Button>
-            <TemplateLibraryComponent
-                templates = {templates}
-                upload = {mockUpload}
-                import = {mockImport}
-                addTemp = {mockNewTemplate}
-                addToCont = { (templateUri) => addToContract(templateIndex, templateUri)}
-                libraryProps = {libraryProps}
-            />
-          </div>
-
-      );
+                  <div className={classes.root}>
+                    <Button variant="contained" color="primary" onClick={insertParagraph}>Insert Some Text</Button>
+                    <Button variant="contained" color="primary" onClick={replaceText}>Find and Replace</Button>
+                    <Button variant="contained" color="primary" onClick={applyStyle}>Apply Style</Button>
+                    <Button variant="contained" color="primary" onClick={changeFont}>Change Font</Button>
+                    <Button variant="contained" color="primary" onClick={applyCustomStyle}>Apply Custom Style</Button>
+                    <Button variant="contained" color="primary" onClick={replaceallsimilarText}>Find And Replace All</Button>
+                    <TemplateLibraryComponent
+                        templates = {templates}
+                        upload = {mockUpload}
+                        import = {mockImport}
+                        addTemp = {mockNewTemplate}
+                        addToCont = { (templateUri) => addToContract(templateIndex, templateUri)}
+                        libraryProps = {libraryProps}
+                    />
+                </div>
+              );
         };
 
         export default LibraryComponent;
