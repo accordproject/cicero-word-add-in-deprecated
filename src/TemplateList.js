@@ -57,13 +57,12 @@ const mockNewTemplate = () => {
 
 /**
  * Adds the text of a template to the MS Word document.
- * @param {*} templateUri 
+ * @param {*} templateUri
  */
 const addToContract = async (templateIndex, templateUri) => {
 
     /* global Word */
     Word.run(async function (context) {
-
         // load the template
         console.log(templateIndex);
         console.log(templateUri);
@@ -73,7 +72,6 @@ const addToContract = async (templateIndex, templateUri) => {
         const url = templateDetails.url;
         const template = await Template.fromUrl(url);
         const sample = template.getMetadata().getSample();
-
         const ciceroMarkTransformer = new CiceroMarkTransformer();
         const dom = ciceroMarkTransformer.fromMarkdown( sample );
         const htmlTransformer = new HtmlTransformer();
@@ -83,7 +81,7 @@ const addToContract = async (templateIndex, templateUri) => {
         return context.sync();
     })
     .catch(function (error) {
-        console.log("Error: " + error);
+        console.log("Error: " + Json.stringify(error));
     });
 };
 
@@ -107,8 +105,8 @@ export const LibraryComponent = (props) => {
             load();
         }, []);
 
-        return ( 
-            <TemplateLibraryComponent 
+        return (
+            <TemplateLibraryComponent
                 templates = {templates}
                 upload = {mockUpload}
                 import = {mockImport}
