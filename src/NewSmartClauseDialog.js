@@ -46,13 +46,15 @@ class NewSmartClauseDialog extends Component {
   };
 
   handleOk = () => {
-    this.setState({ open: false });
-    const that = this;
-    const Office = window.Office;
-    const bindings = Office.context.document.bindings;
+    if(this.state.clauseId !== '' && this.state.templateId !== '') {
+      this.setState({ open: false });
+      const that = this;
+      const Office = window.Office;
+      const bindings = Office.context.document.bindings;
         bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
+    }
   };
 
   handleClauseIdChange = (event) => {
@@ -93,6 +95,7 @@ class NewSmartClauseDialog extends Component {
               fullWidth
               value = {clauseId}
               onChange={this.handleClauseIdChange}
+              helperText="Please enter clauseid"
             />
             <TextField
               required
@@ -104,6 +107,7 @@ class NewSmartClauseDialog extends Component {
               fullWidth
               value = {templateId}
               onChange={this.handleTemplateIdChange}
+              helperText="Please enter templateid"
             />
           </DialogContent>
           <DialogActions>
