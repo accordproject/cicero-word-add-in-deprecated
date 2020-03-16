@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,7 +16,7 @@ import Typography from 'material-ui/Typography';
 /**
  * Creates a new template based on the selected text
  */
-class NewTemplateDialog extends React.Component {
+class NewTemplateDialog extends Component {
 
   constructor(props) {
       super(props);
@@ -28,28 +28,28 @@ class NewTemplateDialog extends React.Component {
       };
     }
 
-  handleClickOpen() {
+  handleClickOpen = () => {
     const that = this;
     that.setState({ open: true });
-
-    window.Office.context.document.getSelectedDataAsync(window.Office.CoercionType.Text, 
+    const Office = window.Office;
+    Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" },
         function (asyncResult) {
-            if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
+            if (asyncResult.status !== Office.AsyncResultStatus.Failed) {
                 that.setState( {selectedText: asyncResult.value});
             }
         });
   };
 
-  handleCancel() {
+  handleCancel = () => {
     this.setState({ open: false });
   };
 
-  handleOk() {
+  handleOk = () => {
     this.setState({ open: false });
   };
 
-  handleTemplateIdChange(event) {
+  handleTemplateIdChange = (event) => {
     this.setState({templateId: event.target.value});
   }
 
@@ -72,16 +72,16 @@ class NewTemplateDialog extends React.Component {
 
   render() {
     const { fullScreen } = this.props;
-
+    const { open,templateId } = this.state;
     const properties = NewTemplateDialog.getVariables(this.state.selectedText);
     return (
       <div>
-        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen.bind(this)}>
+        <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
           <AddIcon />
         </Button>
         <Dialog
           fullScreen={fullScreen}
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
@@ -97,8 +97,8 @@ class NewTemplateDialog extends React.Component {
               label="Template Identifier"
               type="string"
               fullWidth
-              value = {this.state.templateId}
-              onChange={this.handleTemplateIdChange.bind(this)}
+              value = {templateId}
+              onChange={this.handleTemplateIdChange}
             />
             <Paper elevation={0}>
                 <Typography variant="title" component="h4">
@@ -121,10 +121,10 @@ class NewTemplateDialog extends React.Component {
           }
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleCancel.bind(this)} color="primary">
+            <Button onClick={this.handleCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleOk.bind(this)} color="primary" autoFocus>
+            <Button onClick={this.handleOk} color="primary" autoFocus>
               Ok
             </Button>
           </DialogActions>

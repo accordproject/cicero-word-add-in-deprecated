@@ -31,5 +31,8 @@ module.exports = {
             "error",
             "always"
         ]
+    },
+    "globals": {
+        "Word": "readonly"
     }
 };
