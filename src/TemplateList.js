@@ -171,23 +171,21 @@ const addToContract = async (templateIndex, templateUri) => {
 
 export const LibraryComponent = (props) => {
 
-        const templateLibrary = new TemplateLibrary();
         const [templates, setTemplates] = useState(null);
         const [templateIndex, setTemplateIndex] = useState(null);
-
-        async function load() {
-            const templateIndex = await templateLibrary
-                .getTemplateIndex({
-                    latestVersion: true,
-                    ciceroVersion
-                });
-            setTemplateIndex(templateIndex);
-            setTemplates(Object.values(templateIndex))
-        }
-
         useEffect(() => {
+           async function load() {
+                const templateLibrary = new TemplateLibrary();
+                const templateIndex = await templateLibrary
+                    .getTemplateIndex({
+                        latestVersion: true,
+                        ciceroVersion
+                    });
+                setTemplateIndex(templateIndex);
+                setTemplates(Object.values(templateIndex))
+            };
             load();
-        }, []);
+        },[]);
 
         const classes = useStyles();
         return (
