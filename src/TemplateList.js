@@ -108,11 +108,12 @@ function applyCustomStyle() {
 }
 
 
+
 function replaceText() {
   Word.run(function (context) {
     var doc = context.document;
     var originalRange = doc.getSelection();
-    originalRange.insertText("to", "from");
+    originalRange.insertText("many", "Replace");
 
     return context.sync();
   })
@@ -121,9 +122,26 @@ function replaceText() {
   });
 }
 
+
+function replaceallsimilarText() {
+  Word.run(function (context) {
+    var paragraph = context.document.body.paragraphs.getLast();
+    var ranges= paragraph.search('to',{matchCase:true, igonreSpace:true});
+    context.load(ranges);
+    return context.sync().then(()=>{
+      for(var i=0;i<ranges.items.length;i++){
+        ranges.items[i].insertText("to",'hello');
+      }
+    });
+  })
+  .catch(function (error) {
+    console.log("Error: " + error);
+  });
+}
+
 function changeFont() {
   Word.run(function (context) {
-    var secondParagraph = context.document.body.paragraphs.getFirst().getNext();
+    var secondParagraph = context.document.body;
     secondParagraph.font.set({
       name: "Courier New",
       bold: true,
@@ -196,6 +214,7 @@ export const LibraryComponent = (props) => {
             <Button variant="contained" color="primary" onClick={applyStyle}>Apply Style</Button>
             <Button variant="contained" color="primary" onClick={changeFont}>Change Font</Button>
             <Button variant="contained" color="primary" onClick={applyCustomStyle}>Apply Custom Style</Button>
+            <Button variant="contained" color="primary" onClick={replaceallsimilarText}>Find And Replace text</Button>
             <TemplateLibraryComponent
                 templates = {templates}
                 upload = {mockUpload}
