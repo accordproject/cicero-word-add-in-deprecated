@@ -6,9 +6,9 @@ import { withTheme } from 'material-ui/styles'
 /**
  * Root component for the app
  */
-const App = () => {
+const App = (props) => {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider theme={props.theme}>
         <Fragment>
           <TopNavigation/>
         </Fragment>
