@@ -21,6 +21,7 @@ export const AP_THEME = {
     GRAY: '#B9BCC4',
     LIGHT_GRAY: '#F0F0F0',
     WHITE: '#FFFFFF',
+    BLACK: '#000'
 };
 
 export const TEMPLATE_LIBRARY = {
@@ -42,6 +43,7 @@ const libraryProps = {
     TEMPLATE_TITLE: TEMPLATE_LIBRARY.TEMPLATE_TITLE,
     TEMPLATE_DESCRIPTION: TEMPLATE_LIBRARY.TEMPLATE_DESCRIPTION,
     TEMPLATES_HEIGHT: 'calc(100vh - 250px)',
+    SEARCH_COLOR: AP_THEME.BLACK
 };
 
 const mockImport = () => {
