@@ -95,7 +95,6 @@ class NewSmartClauseDialog extends Component {
               fullWidth
               value = {clauseId}
               onChange={this.handleClauseIdChange}
-              helperText="Please enter clauseid"
             />
             <TextField
               required
@@ -107,7 +106,6 @@ class NewSmartClauseDialog extends Component {
               fullWidth
               value = {templateId}
               onChange={this.handleTemplateIdChange}
-              helperText="Please enter templateid"
             />
           </DialogContent>
           <DialogActions>
