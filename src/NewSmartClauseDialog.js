@@ -46,7 +46,7 @@ class NewSmartClauseDialog extends Component {
   };
 
   handleOk = () => {
-    if(this.state.clauseId !== '' && this.state.templateId !== '') {
+    if(this.state.clauseId.trim() !== '' && this.state.templateId.trim() !== '') {
       this.setState({ open: false });
       const that = this;
       const Office = window.Office;
