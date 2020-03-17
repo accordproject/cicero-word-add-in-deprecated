@@ -10,6 +10,7 @@ import Dialog, {
   DialogTitle,
   withMobileDialog,
 } from 'material-ui/Dialog';
+import './index.css';
 
 /**
  * Links the currently selected text to a Template - creating a Smart Clause.
@@ -86,6 +87,7 @@ class NewSmartClauseDialog extends Component {
               Bind the selected text to an existing template.
             </DialogContentText>
             <TextField
+              className={this.state.clauseId.trim() ? '' : 'error'}
               required
               autoFocus
               margin="dense"
@@ -97,6 +99,7 @@ class NewSmartClauseDialog extends Component {
               onChange={this.handleClauseIdChange}
             />
             <TextField
+              className={this.state.templateId.trim() ? '' : 'error'}
               required
               autoFocus
               margin="dense"
