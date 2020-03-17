@@ -191,7 +191,7 @@ export const LibraryComponent = (props) => {
         const templateLibrary = new TemplateLibrary();
         const [templates, setTemplates] = useState(null);
         const [templateIndex, setTemplateIndex] = useState(null);
-
+        useEffect(() => {
         async function load() {
             const templateIndex = await templateLibrary
                 .getTemplateIndex({
@@ -202,7 +202,7 @@ export const LibraryComponent = (props) => {
             setTemplates(Object.values(templateIndex))
         }
 
-        useEffect(() => {
+
             load();
         }, []);
 
