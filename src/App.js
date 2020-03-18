@@ -1,5 +1,5 @@
 import React, { Fragment} from 'react';
-import TopNavigation from './TopNavigation';
+import TopNavigation from './Navigation/TopNavigation';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { withTheme } from 'material-ui/styles'
 import Progress from './Progress.js';

@@ -9,8 +9,8 @@ import NoteIcon from '@material-ui/icons/Note';
 
 import CodeIcon from '@material-ui/icons/Code';
 
-import SmartClauseList from './SmartClauseList';
-import TemplateList from './TemplateList';
+import SmartClauseList from '../ClauseEditor/SmartClauseList';
+import TemplateList from '../TemplateEditor/TemplateList';
 
 function TabContainer(props) {
   return (
