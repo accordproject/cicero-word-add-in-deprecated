@@ -43,18 +43,18 @@ class NewSmartClauseDialog extends Component {
   };
 
   handleCancel = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, clauseId: '', templateId: '' });
   };
 
   handleOk = () => {
     if(this.state.clauseId.trim() !== '' && this.state.templateId.trim() !== '') {
-      this.setState({ open: false });
       const that = this;
       const Office = window.Office;
       const bindings = Office.context.document.bindings;
-        bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
-        that.props.callback();
-    });
+          bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
+          that.props.callback();
+      });
+      this.setState({ open: false, clauseId: '', templateId: ''})
     }
   };
 
