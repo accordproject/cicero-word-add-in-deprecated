@@ -45,7 +45,7 @@ const styles = theme => ({
         <Tab label="Cicero Word Add in"/>
       </AppBar>
         <AppBar position="static">
-          <Tabs value={value} onChange={handleChange} scrollable scrollButtons="off">
+          <Tabs value={value} onChange={handleChange} fullWidth>
             <Tab label="Smart Clauses" icon={<NoteIcon />} />
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
