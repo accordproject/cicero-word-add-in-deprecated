@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Fragment} from 'react';
 import TopNavigation from './TopNavigation';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { withTheme } from 'material-ui/styles'
@@ -8,26 +8,20 @@ import Progress from './Progress.js';
 /**
  * Root component for the app
  */
-class App extends Component {
-  constructor(props) {
-  super(props);
-}
-render() {
-    const { title, isOfficeInitialized } = this.props;
-
-    if (!isOfficeInitialized) {
+const App = props => {
+    if (!props.isOfficeInitialized) {
       return (
-        <Progress title={title}  />
+        <Progress title={props.title}  />
       );
     }
     return (
-      <MuiThemeProvider theme={this.props.theme}>
+      <MuiThemeProvider theme={props.theme}>
         <Fragment>
           <TopNavigation/>
         </Fragment>
       </MuiThemeProvider>
     );
 }
-}
+
 
 export default withTheme()(App);
