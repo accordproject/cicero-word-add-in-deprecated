@@ -11,6 +11,7 @@ class Progress extends Component {
                 <div className="spinner">
                     <img width="20%"  src={Logo} alt={title} title={title}/>
                     <Spinner radius={50} color={"#333"} stroke={3} visible={true} />
+                    <h2>Please sideload your addin to see app body.</h2>
                 </div>
             </MuiThemeProvider>
         );
