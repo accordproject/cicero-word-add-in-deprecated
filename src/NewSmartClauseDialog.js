@@ -10,6 +10,7 @@ import Dialog, {
   DialogTitle,
   withMobileDialog,
 } from 'material-ui/Dialog';
+import './index.css';
 
 /**
  * Links the currently selected text to a Template - creating a Smart Clause.
@@ -46,13 +47,15 @@ class NewSmartClauseDialog extends Component {
   };
 
   handleOk = () => {
-    this.setState({ open: false });
-    const that = this;
-    const Office = window.Office;
-    const bindings = Office.context.document.bindings;
+    if(this.state.clauseId.trim() !== '' && this.state.templateId.trim() !== '') {
+      this.setState({ open: false });
+      const that = this;
+      const Office = window.Office;
+      const bindings = Office.context.document.bindings;
         bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
         that.props.callback();
     });
+    }
   };
 
   handleClauseIdChange = (event) => {
@@ -84,6 +87,7 @@ class NewSmartClauseDialog extends Component {
               Bind the selected text to an existing template.
             </DialogContentText>
             <TextField
+              className={this.state.clauseId.trim() ? '' : 'error'}
               required
               autoFocus
               margin="dense"
@@ -95,6 +99,7 @@ class NewSmartClauseDialog extends Component {
               onChange={this.handleClauseIdChange}
             />
             <TextField
+              className={this.state.templateId.trim() ? '' : 'error'}
               required
               autoFocus
               margin="dense"
