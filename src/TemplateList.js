@@ -6,6 +6,7 @@ import {
     TemplateLibrary as TemplateLibraryComponent
 } from '@accordproject/cicero-ui';
 import {TemplateLibrary, Template} from '@accordproject/cicero-core';
+import {CircularProgress} from 'material-ui';
 import {
     version as ciceroVersion
 } from '@accordproject/cicero-core/package.json';
@@ -106,6 +107,10 @@ export const LibraryComponent = (props) => {
             };
             load();
         },[]);
+
+        if(!templates){
+           return  (<div className="template-list-loading-spinner"><CircularProgress /></div>);
+        }
 
         return ( 
             <TemplateLibraryComponent 
