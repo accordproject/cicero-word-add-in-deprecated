@@ -108,7 +108,7 @@ export const LibraryComponent = (props) => {
             load();
         },[]);
 
-        if(templates){
+        if(!templates){
            return  (<div className="template-list-loading-spinner"><CircularProgress /></div>);
         }
 
