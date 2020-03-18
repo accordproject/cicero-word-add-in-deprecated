@@ -56,10 +56,9 @@ const mockNewTemplate = () => {
     console.log('new template');
 };
 
-
 /**
  * Adds the text of a template to the MS Word document.
- * @param {*} templateUri 
+ * @param {*} templateUri
  */
 const addToContract = async (templateIndex, templateUri) => {
 
@@ -75,7 +74,6 @@ const addToContract = async (templateIndex, templateUri) => {
         const url = templateDetails.url;
         const template = await Template.fromUrl(url);
         const sample = template.getMetadata().getSample();
-
         const ciceroMarkTransformer = new CiceroMarkTransformer();
         const dom = ciceroMarkTransformer.fromMarkdown( sample );
         const htmlTransformer = new HtmlTransformer();
@@ -90,7 +88,6 @@ const addToContract = async (templateIndex, templateUri) => {
 };
 
 export const LibraryComponent = (props) => {
-
         const [templates, setTemplates] = useState(null);
         const [templateIndex, setTemplateIndex] = useState(null);
         useEffect(() => {
@@ -107,8 +104,8 @@ export const LibraryComponent = (props) => {
             load();
         },[]);
 
-        return ( 
-            <TemplateLibraryComponent 
+        return (
+            <TemplateLibraryComponent
                 templates = {templates}
                 upload = {mockUpload}
                 import = {mockImport}

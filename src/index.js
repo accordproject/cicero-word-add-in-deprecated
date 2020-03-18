@@ -8,11 +8,11 @@ import registerServiceWorker from './registerServiceWorker';
 const Office = window.Office;
 
 let isOfficeInitialized = false;
-
+const title = "Cicero Word Add-in";
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
-      <Component isOfficeInitialized={isOfficeInitialized} />
+      <Component title={title} isOfficeInitialized={isOfficeInitialized} />
     </AppContainer>,
     document.getElementById("root")
   );
