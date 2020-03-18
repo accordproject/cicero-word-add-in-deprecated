@@ -32,14 +32,13 @@ const styles = theme => ({
 /**
  * Manages the tabs across the top of the application
  */
-  const  TopNavigation = (props) => {
+  const  TopNavigation = ({ classes }) => {
   
   const [value, setValue] = useState(0);
   const handleChange = (event, value) => {
     setValue( value );
   };
 
-    const { classes } = props;
     return (
       <div className={classes.root}>
       <AppBar position="static" >
