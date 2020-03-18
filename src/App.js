@@ -17,7 +17,7 @@ render() {
 
     if (!isOfficeInitialized) {
       return (
-        <Progress title={title} message="Please sideload your addin to see app body." />
+        <Progress title={title}  />
       );
     }
     return (
