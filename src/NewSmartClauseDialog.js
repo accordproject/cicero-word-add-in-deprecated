@@ -78,7 +78,7 @@ class NewSmartClauseDialog extends Component {
         <Dialog
           fullScreen={fullScreen}
           open={open}
-          onClose={this.handleClose}
+          onClose={this.handleCancel}
           aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle id="responsive-dialog-title">{"Insert Smart Clause"}</DialogTitle>
