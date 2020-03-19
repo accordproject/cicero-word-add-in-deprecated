@@ -19,4 +19,6 @@
     text-align: center;
     font-style: italic;
     font-size: smaller;
+    -moz-box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
+    box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
 }

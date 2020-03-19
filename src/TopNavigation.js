@@ -8,7 +8,7 @@ import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
 import SmartClauseList from './SmartClauseList';
 import TemplateList from './TemplateList';
-import Footer from './Footer';
+
 
 function TabContainer(props) {
   return (
@@ -58,7 +58,7 @@ const styles = theme => ({
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer><SmartClauseList/><Footer/></TabContainer>}
+        {value === 0 && <TabContainer><SmartClauseList/></TabContainer>}
         {value === 1 && <TabContainer><TemplateList/></TabContainer>}
       </div>
     );
