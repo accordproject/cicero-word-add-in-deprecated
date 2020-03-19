@@ -53,7 +53,7 @@ const styles = theme => ({
         Cicero Word Add In
       </AppBar>
         <AppBar position="static">
-          <Tabs value={value} onChange={handleChange} scrollable scrollButtons="off">
+          <Tabs value={value} onChange={handleChange} fullWidth>
             <Tab label="Clause Template" icon={<NoteIcon />} />
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
