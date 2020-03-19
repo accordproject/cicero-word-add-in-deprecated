@@ -9,6 +9,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import SmartClauseList from './SmartClauseList';
 import TemplateList from './TemplateList';
 
+
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -27,6 +28,13 @@ const styles = theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  appbar: {
+    alignItems: 'center',
+    paddingTop: '5%',
+    paddingBottom: '5%',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  }
 });
 
 /**
@@ -41,12 +49,12 @@ const styles = theme => ({
 
     return (
       <div className={classes.root}>
-      <AppBar position="static" >
-        <Tab label="Cicero Word Add in"/>
+      <AppBar position="static" className={classes.appbar}>
+        Cicero Word Add In
       </AppBar>
         <AppBar position="static">
           <Tabs value={value} onChange={handleChange} fullWidth>
-            <Tab label="Smart Clauses" icon={<NoteIcon />} />
+            <Tab label="Clause Template" icon={<NoteIcon />} />
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
         </AppBar>
