@@ -81,7 +81,7 @@ class NewSmartClauseDialog extends Component {
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{"Insert Smart Clause"}</DialogTitle>
+          <DialogTitle id="responsive-dialog-title">{"Insert Clause Template"}</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Bind the selected text to an existing template.
