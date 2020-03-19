@@ -53,7 +53,7 @@ const styles = theme => ({
       </AppBar>
         <AppBar position="static">
           <Tabs value={value} onChange={handleChange} scrollable scrollButtons="off">
-            <Tab label="Smart Clauses" icon={<NoteIcon />} />
+            <Tab label="Clause Template" icon={<NoteIcon />} />
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
         </AppBar>
