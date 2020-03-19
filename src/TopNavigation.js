@@ -9,6 +9,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import SmartClauseList from './SmartClauseList';
 import TemplateList from './TemplateList';
 
+
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
