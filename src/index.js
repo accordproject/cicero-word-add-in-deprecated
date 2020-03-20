@@ -7,6 +7,6 @@ import registerServiceWorker from './registerServiceWorker';
 const Office = window.Office;
 
 Office.initialize = () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
-  registerServiceWorker();
+    ReactDOM.render(<App />, document.getElementById('root'));
+    registerServiceWorker();
 };

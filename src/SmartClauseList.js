@@ -3,7 +3,7 @@ import List, { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } f
 import DescriptionIcon from '@material-ui/icons/Description';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { withTheme } from 'material-ui/styles'
+import { withTheme } from 'material-ui/styles';
 import NewSmartClauseDialog from './NewSmartClauseDialog';
 
 /**
@@ -14,18 +14,18 @@ import NewSmartClauseDialog from './NewSmartClauseDialog';
  * </ul>
  */
 class SmartClauseList extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      items: [],
-      message: ''
+        this.state = {
+            items: [],
+            message: ''
+        };
     }
-  }
 
-  componentDidMount() {
-    this.getBindings();
-  }
+    componentDidMount() {
+        this.getBindings();
+    }
 
   getBindings = () => {
       const bindings = window.Office.context.document.bindings;
@@ -60,8 +60,8 @@ class SmartClauseList extends Component {
   };
 
   gotoBinding = (id) => {
-    const document = window.Office.context.document;
-    document.goToByIdAsync(id, window.Office.GoToType.Binding);
+      const document = window.Office.context.document;
+      document.goToByIdAsync(id, window.Office.GoToType.Binding);
   };
 
   render() {

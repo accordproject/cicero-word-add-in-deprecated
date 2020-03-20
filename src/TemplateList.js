@@ -82,46 +82,46 @@ const addToContract = async (templateIndex, templateUri) => {
         // console.log(JSON.stringify(dom, null, 2));
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
-        var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
-        blankParagraph.insertHtml(html, "End");
+        var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph('', 'After');
+        blankParagraph.insertHtml(html, 'End');
         return context.sync();
     })
-    .catch(function (error) {
-        console.error("Error: " + error);
-    });
+        .catch(function (error) {
+            console.error('Error: ' + error);
+        });
 };
 
 export const LibraryComponent = (props) => {
 
-        const [templates, setTemplates] = useState(null);
-        const [templateIndex, setTemplateIndex] = useState(null);
-        useEffect(() => {
-           async function load() {
-                const templateLibrary = new TemplateLibrary();
-                const templateIndex = await templateLibrary
-                    .getTemplateIndex({
-                        latestVersion: true,
-                        ciceroVersion
-                    });
-                setTemplateIndex(templateIndex);
-                setTemplates(Object.values(templateIndex))
-            };
-            load();
-        },[]);
-
-        if(!templates){
-           return  (<div className="template-list-loading-spinner"><CircularProgress /></div>);
+    const [templates, setTemplates] = useState(null);
+    const [templateIndex, setTemplateIndex] = useState(null);
+    useEffect(() => {
+        async function load() {
+            const templateLibrary = new TemplateLibrary();
+            const templateIndex = await templateLibrary
+                .getTemplateIndex({
+                    latestVersion: true,
+                    ciceroVersion
+                });
+            setTemplateIndex(templateIndex);
+            setTemplates(Object.values(templateIndex));
         }
+        load();
+    },[]);
 
-        return ( 
-            <TemplateLibraryComponent 
-                templates = {templates}
-                upload = {mockUpload}
-                import = {mockImport}
-                addTemp = {mockNewTemplate}
-                addToCont = { (templateUri) => addToContract(templateIndex, templateUri)}
-                libraryProps = {libraryProps}
-            />);
-        };
+    if(!templates){
+        return  (<div className="template-list-loading-spinner"><CircularProgress /></div>);
+    }
 
-        export default LibraryComponent;
+    return ( 
+        <TemplateLibraryComponent 
+            templates = {templates}
+            upload = {mockUpload}
+            import = {mockImport}
+            addTemp = {mockNewTemplate}
+            addToCont = { (templateUri) => addToContract(templateIndex, templateUri)}
+            libraryProps = {libraryProps}
+        />);
+};
+
+export default LibraryComponent;
