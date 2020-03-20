@@ -5,7 +5,7 @@ import React, {
 import {
     TemplateLibrary as TemplateLibraryComponent
 } from '@accordproject/cicero-ui';
-import {TemplateLibrary, Template} from '@accordproject/cicero-core';
+import {TemplateLibrary, Template, Clause} from '@accordproject/cicero-core';
 import {
     version as ciceroVersion
 } from '@accordproject/cicero-core/package.json';
@@ -64,7 +64,7 @@ const mockNewTemplate = () => {
 const addToContract = async (templateIndex, templateUri) => {
 
     /* global Word */
-    Word.run(async function (context) {
+    Word.run(async function (context) { 
 
         // load the template
         console.log(templateIndex);
@@ -75,9 +75,12 @@ const addToContract = async (templateIndex, templateUri) => {
         const url = templateDetails.url;
         const template = await Template.fromUrl(url);
         const sample = template.getMetadata().getSample();
-
+        const clause = new Clause(template);
+        clause.parse(sample);
+        const sampleWrapped = clause.draft({ wrapVariables: true });
         const ciceroMarkTransformer = new CiceroMarkTransformer();
-        const dom = ciceroMarkTransformer.fromMarkdown( sample );
+        const dom = ciceroMarkTransformer.fromMarkdown(sampleWrapped, 'json');
+        console.log(JSON.stringify(dom, null, 2));
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
         var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
