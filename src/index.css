@@ -41,3 +41,6 @@ footer p a {
 footer p a:hover {
     text-decoration: underline;
 }
+ .logo {
+     width: 20%;
+ }
