@@ -13,7 +13,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
         "indent": [
@@ -34,7 +35,9 @@ module.exports = {
         ],
     "no-unused-vars": [1],
     "no-undef": [1],
-    "no-redeclare": [1]
+    "no-redeclare": [1],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
     },
     "globals": {
         "Word": "readonly"
