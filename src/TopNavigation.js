@@ -8,6 +8,7 @@ import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
 import SmartClauseList from './SmartClauseList';
 import TemplateList from './TemplateList';
+import {ReactComponent as Logo} from './assets/CICERO-WHITE-ON-TRANSPARANT-LOGOTYPE.svg';
 
 
 function TabContainer(props) {
@@ -52,7 +53,8 @@ const  TopNavigation = ({ classes }) => {
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.appbar}>
-        Cicero Word Add In
+        <Logo className="logo"/> 
+        <div>Word Add in</div>
             </AppBar>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} fullWidth>

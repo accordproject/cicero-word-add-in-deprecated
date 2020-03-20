@@ -29,3 +29,7 @@
 .dialog-content{
     min-height: 80vh;
 }
+
+ .logo {
+     width: 20%;
+ }
