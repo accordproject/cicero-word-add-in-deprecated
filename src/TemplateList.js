@@ -5,7 +5,7 @@ import React, {
 import {
     TemplateLibrary as TemplateLibraryComponent
 } from '@accordproject/cicero-ui';
-import {TemplateLibrary, Template} from '@accordproject/cicero-core';
+import {TemplateLibrary, Template, Clause} from '@accordproject/cicero-core';
 import {CircularProgress} from 'material-ui';
 import {
     version as ciceroVersion
@@ -76,12 +76,15 @@ const addToContract = async (templateIndex, templateUri) => {
         const url = templateDetails.url;
         const template = await Template.fromUrl(url);
         const sample = template.getMetadata().getSample();
+        // console.log(sample);
         const clause = new Clause(template);
         clause.parse(sample);
-        const sampleWrapped = clause.draft({ wrapVariables: true });
+        // console.log(JSON.stringify(clause.getData(), null, 2));
+        const sampleWrapped = await clause.draft({ wrapVariables: true });
+        // console.log(sampleWrapped);
         const ciceroMarkTransformer = new CiceroMarkTransformer();
         const dom = ciceroMarkTransformer.fromMarkdown(sampleWrapped, 'json');
-        console.log(JSON.stringify(dom, null, 2));
+        // console.log(JSON.stringify(dom, null, 2));
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
         var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph("", "After");
