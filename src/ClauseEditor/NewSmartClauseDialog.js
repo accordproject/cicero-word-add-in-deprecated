@@ -35,16 +35,14 @@ class NewSmartClauseDialog extends Component {
     }
 
   handleClickOpen = () => {
-      const that = this;
-      const document = window.Office.context.document;
-      that.setState({ open: true });
-      document.getSelectedDataAsync(window.Office.CoercionType.Text,
-          { valueFormat: 'unformatted', filterType: 'all' },
-          function (asyncResult) {
-              if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
-                  that.setState( {selectedText: asyncResult.value});
-              }
-          });
+    const document = window.Office.context.document;
+    this.setState({ open: true });
+    document.getSelectedDataAsync(window.Office.CoercionType.Text,
+        { valueFormat: "unformatted", filterType: "all" }, (asyncResult) => {
+            if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
+                this.setState( {selectedText: asyncResult.value});
+            }
+        });
   };
 
   handleCancel = () => {
@@ -52,15 +50,14 @@ class NewSmartClauseDialog extends Component {
   };
 
   handleOk = (values) => {
-      if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
-          const that = this;
-          const Office = window.Office;
-          const bindings = Office.context.document.bindings;
-          bindings.addFromSelectionAsync(Office.BindingType.Text, { id: values.clauseId + '/' + values.templateId }, function (asyncResult) {
-              that.props.callback();
-          });
-          this.setState({ open: false });
-      }
+    if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
+      const Office = window.Office;
+      const bindings = Office.context.document.bindings;
+          bindings.addFromSelectionAsync(Office.BindingType.Text, { id: values.clauseId + '/' + values.templateId }, (asyncResult) => {
+          this.props.callback();
+      });
+      this.setState({ open: false })
+    }
   };
 
   render() {
