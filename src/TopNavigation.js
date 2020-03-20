@@ -34,6 +34,8 @@ const styles = theme => ({
     paddingBottom: '5%',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    position: 'sticky',
+    top: '0px'
   }
 });
 
