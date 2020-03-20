@@ -1,3 +1,24 @@
+.template-list-loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .error label {
     color: red;
+}
+
+.footer {
+    position: fixed;
+    left: 0%;
+    bottom: 0%;
+    width: 100%;
+    background-color: #5f34eb;
+    color: white;
+    text-align: center;
+    font-style: italic;
+    font-size: smaller;
+    -moz-box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
+    box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
 }
