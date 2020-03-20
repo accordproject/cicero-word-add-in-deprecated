@@ -42,21 +42,13 @@ const styles = theme => ({
 /**
  * Manages the tabs across the top of the application
  */
-<<<<<<< HEAD:src/Navigation/TopNavigation.js
-  const  TopNavigation = ({ classes }) => {
-
-  const [value, setValue] = useState(0);
-  const handleChange = (event, value) => {
-    setValue( value );
-  };
-=======
 const  TopNavigation = ({ classes }) => {
-  
+
     const [value, setValue] = useState(0);
     const handleChange = (event, value) => {
         setValue( value );
     };
->>>>>>> c8878f43d3ecd87dcd7e800b837cb29c3c52ecad:src/TopNavigation.js
+
 
     return (
         <div className={classes.root}>
