@@ -8,13 +8,13 @@ import Footer from './Footer';
  */
 const App = (props) => {
     return (
-      <MuiThemeProvider theme={props.theme}>
-        <Fragment>
-          <TopNavigation/>
-          <Footer/>
-        </Fragment>
-      </MuiThemeProvider>
+        <MuiThemeProvider theme={props.theme}>
+            <Fragment>
+                <TopNavigation/>
+                <Footer/>
+            </Fragment>
+        </MuiThemeProvider>
     );
-}
+};
 
 export default withTheme()(App);
