@@ -6,8 +6,8 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
-import SmartClauseList from './SmartClauseList';
-import TemplateList from './TemplateList';
+import SmartClauseList from '../ClauseEditor/SmartClauseList';
+import TemplateList from '../TemplateEditor/TemplateList';
 
 
 function TabContainer(props) {
@@ -34,6 +34,8 @@ const styles = theme => ({
     paddingBottom: '5%',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    position: 'sticky',
+    top: '0px'
   }
 });
 
@@ -53,8 +55,8 @@ const styles = theme => ({
         Cicero Word Add In
       </AppBar>
         <AppBar position="static">
-          <Tabs value={value} onChange={handleChange} scrollable scrollButtons="off">
-            <Tab label="Smart Clauses" icon={<NoteIcon />} />
+          <Tabs value={value} onChange={handleChange} fullWidth>
+            <Tab label="Clause Template" icon={<NoteIcon />} />
             <Tab label="Templates" icon={<CodeIcon />} />
           </Tabs>
         </AppBar>
