@@ -11,11 +11,13 @@ import Dialog, {
   withMobileDialog,
 } from 'material-ui/Dialog';
 import './index.css';
+import { Form, Field } from "react-final-form";
 
 /**
  * Links the currently selected text to a Template - creating a Smart Clause.
  * MS Office 'Bindings' are used to maintain the link between the text and the template and clause id.
  */
+
 class NewSmartClauseDialog extends Component {
 
   constructor(props) {
@@ -24,8 +26,6 @@ class NewSmartClauseDialog extends Component {
       this.state = {
         open: false,
         selectedText: '',
-        clauseId: '',
-        templateId: ''
       };
     }
 
@@ -43,28 +43,20 @@ class NewSmartClauseDialog extends Component {
   };
 
   handleCancel = () => {
-    this.setState({ open: false, clauseId: '', templateId: '' });
+    this.setState({ open: false });
   };
 
-  handleOk = () => {
-    if(this.state.clauseId.trim() !== '' && this.state.templateId.trim() !== '') {
+  handleOk = (values) => {
+    if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
       const that = this;
       const Office = window.Office;
       const bindings = Office.context.document.bindings;
-          bindings.addFromSelectionAsync(Office.BindingType.Text, { id: that.state.clauseId + '/' + that.state.templateId }, function (asyncResult) {
+          bindings.addFromSelectionAsync(Office.BindingType.Text, { id: values.clauseId + '/' + values.templateId }, function (asyncResult) {
           that.props.callback();
       });
-      this.setState({ open: false, clauseId: '', templateId: ''})
+      this.setState({ open: false })
     }
   };
-
-  handleClauseIdChange = (event) => {
-    this.setState({clauseId: event.target.value});
-  }
-
-  handleTemplateIdChange = (event) => {
-    this.setState({templateId: event.target.value});
-  }
 
   render() {
     const { fullScreen } = this.props;
@@ -81,44 +73,60 @@ class NewSmartClauseDialog extends Component {
           onClose={this.handleCancel}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{"Insert Clause Template"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Bind the selected text to an existing template.
-            </DialogContentText>
-            <TextField
-              className={this.state.clauseId.trim() ? '' : 'error'}
-              required
-              autoFocus
-              margin="dense"
-              id="clauseId"
-              label="Clause Identifier"
-              type="string"
-              fullWidth
-              value = {clauseId}
-              onChange={this.handleClauseIdChange}
-            />
-            <TextField
-              className={this.state.templateId.trim() ? '' : 'error'}
-              required
-              autoFocus
-              margin="dense"
-              id="templateId"
-              label="Template Identifier"
-              type="string"
-              fullWidth
-              value = {templateId}
-              onChange={this.handleTemplateIdChange}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleCancel} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleOk} color="primary" autoFocus>
-              Ok
-            </Button>
-          </DialogActions>
+          <Form
+            onSubmit={this.handleOk}
+            render={({ handleSubmit, form, submitting, pristine, values }) => (
+              <form onSubmit={handleSubmit}>
+                <DialogTitle id="responsive-dialog-title">{"Insert Clause Template"}</DialogTitle>
+                <DialogContent className='dialog-content'>
+                  <DialogContentText>
+                    Bind the selected text to an existing template.
+                  </DialogContentText>
+                  <Field name='clauseId' validate={value => (value && value.trim() ? '' : "Must have valid ClauseId")}>
+                  {({ input, meta }) => (
+                    <>
+                      <TextField
+                        {...input}
+                        autoFocus
+                        margin="dense"
+                        id="clauseId"
+                        label="Clause Identifier"
+                        type="text"
+                        fullWidth
+                        value = {values.clauseId}
+                      />
+                      {meta.error && meta.touched && <span className='error'>{meta.error}</span>}
+                    </>
+                  )}
+                  </Field>
+                  <Field name='templateId' validate={value => (value && value.trim() ? '' : "Must have valid TemplateId")}>
+                    {({ input, meta }) => (
+                      <>
+                        <TextField
+                          {...input}
+                          autoFocus
+                          margin="dense"
+                          id="templateId"
+                          label="Template Identifier"
+                          type="text"
+                          fullWidth
+                          value = {values.templateId}
+                        />
+                        {meta.error && meta.touched && <span className='error'>{meta.error}</span>}
+                      </>
+                    )}
+                  </Field>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.handleCancel} color="primary">
+                    Cancel
+                  </Button>
+                  <Button type="submit" color="primary" autoFocus>
+                    Ok
+                  </Button>
+                </DialogActions>
+              </form>)}
+          />
         </Dialog>
       </div>
     );
