@@ -28,9 +28,8 @@ class SmartClauseList extends Component {
   }
 
   getBindings = () => {
-      const that = this;
       const bindings = window.Office.context.document.bindings;
-      bindings.getAllAsync(function (asyncResult) {
+      bindings.getAllAsync((asyncResult) => {
         if(asyncResult) {
             const newItems = [];
 
@@ -45,19 +44,18 @@ class SmartClauseList extends Component {
                 }
                 newItems.push( {id: text, clauseId: id, templateId: template});
             }
-            that.setState({items: newItems});
+            this.setState({items: newItems});
         }
         else {
-            that.setState({message: 'Could not get bindings.'});
+            this.setState({message: 'Could not get bindings.'});
         }
     });
   }
 
   removeBinding = (id) => {
-    const that = this;
     const bindings = window.Office.context.document.bindings
-    bindings.releaseByIdAsync(id, function (asyncResult) {
-      that.getBindings();
+    bindings.releaseByIdAsync(id, (asyncResult) => {
+      this.getBindings();
     });
   };
 
@@ -67,19 +65,18 @@ class SmartClauseList extends Component {
   };
 
   render() {
-    const that = this;
     return (
       <div className={this.props.theme.palette.background.paper}>
-        <NewSmartClauseDialog callback={that.getBindings}/>
+        <NewSmartClauseDialog callback={this.getBindings}/>
         <List component="nav">
-          {this.state.items.map(function(item,index) {
+          {this.state.items.map((item,index) => {
             return (
-              <ListItem button key={item.id} onClick={() => that.gotoBinding(item.id)}>
+              <ListItem button key={item.id} onClick={() => this.gotoBinding(item.id)}>
               <ListItemIcon>
                 <DescriptionIcon />
               </ListItemIcon>
               <ListItemText secondary={item.clauseId} primary={item.templateId}/>
-              <ListItemSecondaryAction onClick={() => that.removeBinding(item.id)}>
+              <ListItemSecondaryAction onClick={() => this.removeBinding(item.id)}>
                 <IconButton aria-label="Delete">
                   <DeleteIcon />
                 </IconButton>

@@ -29,14 +29,12 @@ class NewTemplateDialog extends Component {
     }
 
   handleClickOpen = () => {
-    const that = this;
-    that.setState({ open: true });
+    this.setState({ open: true });
     const Office = window.Office;
     Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
-        { valueFormat: "unformatted", filterType: "all" },
-        function (asyncResult) {
+        { valueFormat: "unformatted", filterType: "all" }, (asyncResult) => {
             if (asyncResult.status !== Office.AsyncResultStatus.Failed) {
-                that.setState( {selectedText: asyncResult.value});
+                this.setState( {selectedText: asyncResult.value});
             }
         });
   };
