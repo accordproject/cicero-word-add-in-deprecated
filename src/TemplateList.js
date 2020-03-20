@@ -48,13 +48,10 @@ const libraryProps = {
 };
 
 const mockImport = () => {
-    console.log('import');
 };
 const mockUpload = () => {
-    console.log('upload');
 };
 const mockNewTemplate = () => {
-    console.log('new template');
 };
 
 
@@ -68,8 +65,6 @@ const addToContract = async (templateIndex, templateUri) => {
     Word.run(async function (context) { 
 
         // load the template
-        console.log(templateIndex);
-        console.log(templateUri);
         const hashIndex = templateUri.indexOf('#');
         const templateId = templateUri.substring(5, hashIndex);
         const templateDetails = templateIndex[templateId];
@@ -92,7 +87,7 @@ const addToContract = async (templateIndex, templateUri) => {
         return context.sync();
     })
     .catch(function (error) {
-        console.log("Error: " + error);
+        console.error("Error: " + error);
     });
 };
 
