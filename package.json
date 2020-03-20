@@ -24,11 +24,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "eslint": "eslint src/*.js"
+    "eslint": "eslint src/*.js",
+    "eslint:fix": "eslint src/*.js --fix"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.19.0"
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1"
   },
   "browserslist": {
     "production": [
