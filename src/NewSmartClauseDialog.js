@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, {useState, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,70 +18,60 @@ import { Form, Field } from 'react-final-form';
  * MS Office 'Bindings' are used to maintain the link between the text and the template and clause id.
  */
 
-class NewSmartClauseDialog extends Component {
+const NewSmartClauseDialog = ( {fullScreen , callback} ) => {
 
-    constructor(props) {
-        super(props);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedText, setSelectedText] = useState('');
 
-        this.state = {
-            open: false,
-            selectedText: '',
-        };
-    }
-
-  handleClickOpen = () => {
+  const handleClickOpen = () => {
     const document = window.Office.context.document;
-    this.setState({ open: true });
+        setIsOpen(!isOpen);
     document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" }, (asyncResult) => {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
-                this.setState( {selectedText: asyncResult.value});
+                setSelectedText(asyncResult.value);
             }
         });
   };
 
-  handleCancel = () => {
-      this.setState({ open: false });
+  const handleCancel = () => {
+      setIsOpen(false);
   };
 
-  handleOk = (values) => {
+  const handleOk = (values) => {
     if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
       const Office = window.Office;
       const bindings = Office.context.document.bindings;
           bindings.addFromSelectionAsync(Office.BindingType.Text, { id: values.clauseId + '/' + values.templateId }, (asyncResult) => {
-          this.props.callback();
+            callback();
       });
-      this.setState({ open: false })
+        setIsOpen(false);
     }
   };
 
-  render() {
-      const { fullScreen } = this.props;
-      const { open,clauseId,templateId } = this.state;
-
       return (
           <div>
-              <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
+              <Button variant="fab" color="primary" aria-label="add" onClick={handleClickOpen}>
                   <AddIcon />
               </Button>
               <Dialog
                   fullScreen={fullScreen}
-                  open={open}
-                  onClose={this.handleCancel}
+                  open={isOpen}
+                  onClose={handleCancel}
                   aria-labelledby="responsive-dialog-title"
               >
                   <Form
-                      onSubmit={this.handleOk}
+                      onSubmit={handleOk}
                       render={({ handleSubmit, form, submitting, pristine, values }) => (
                           <form onSubmit={handleSubmit}>
                               <DialogTitle id="responsive-dialog-title">{'Insert Clause Template'}</DialogTitle>
                               <DialogContent className='dialog-content'>
                                   <DialogContentText>
-                    Bind the selected text to an existing template.
+                                    Bind the selected text to an existing template.
                                   </DialogContentText>
                                   <Field name='clauseId' validate={value => (value && value.trim() ? '' : 'Must have valid ClauseId')}>
                                       {({ input, meta }) => (
-                                          <>
+                                          <Fragment>
                                               <TextField
                                                   {...input}
                                                   autoFocus
@@ -93,12 +83,12 @@ class NewSmartClauseDialog extends Component {
                                                   value = {values.clauseId}
                                               />
                                               {meta.error && meta.touched && <span className='error'>{meta.error}</span>}
-                                          </>
+                                          </Fragment>
                                       )}
                                   </Field>
                                   <Field name='templateId' validate={value => (value && value.trim() ? '' : 'Must have valid TemplateId')}>
                                       {({ input, meta }) => (
-                                          <>
+                                          <Fragment>
                                               <TextField
                                                   {...input}
                                                   autoFocus
@@ -110,16 +100,16 @@ class NewSmartClauseDialog extends Component {
                                                   value = {values.templateId}
                                               />
                                               {meta.error && meta.touched && <span className='error'>{meta.error}</span>}
-                                          </>
+                                          </Fragment>
                                       )}
                                   </Field>
                               </DialogContent>
                               <DialogActions>
-                                  <Button onClick={this.handleCancel} color="primary">
-                    Cancel
+                                  <Button onClick={handleCancel} color="primary">
+                                    Cancel
                                   </Button>
                                   <Button type="submit" color="primary" autoFocus>
-                    Ok
+                                     Ok
                                   </Button>
                               </DialogActions>
                           </form>)}
@@ -128,7 +118,6 @@ class NewSmartClauseDialog extends Component {
           </div>
       );
   }
-}
 
 NewSmartClauseDialog.propTypes = {
     fullScreen: PropTypes.bool.isRequired,
