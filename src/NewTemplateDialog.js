@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,42 +16,36 @@ import Typography from 'material-ui/Typography';
 /**
  * Creates a new template based on the selected text
  */
-class NewTemplateDialog extends Component {
+const NewTemplateDialog = ({ fullScreen }) => {
 
-    constructor(props) {
-        super(props);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedText, setSelectedText] = useState('');
+    const [templateId, setTemplateId] = useState('');
 
-        this.state = {
-            open: false,
-            selectedText: '',
-            templateId: ''
-        };
-    }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  const handleClickOpen = () => {
+    setIsOpen(!isOpen);
     const Office = window.Office;
     Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" }, (asyncResult) => {
             if (asyncResult.status !== Office.AsyncResultStatus.Failed) {
-                this.setState( {selectedText: asyncResult.value});
+                setSelectedText(asyncResult.value);
             }
         });
   };
 
-  handleCancel = () => {
-      this.setState({ open: false });
+  const handleCancel = () => {
+      setIsOpen(isOpen);
   };
 
-  handleOk = () => {
-      this.setState({ open: false });
+  const handleOk = () => {
+      setIsOpen(isOpen);
   };
 
-  handleTemplateIdChange = (event) => {
-      this.setState({templateId: event.target.value});
+  const handleTemplateIdChange = (event) => {
+      setTemplateId(event.target.value);
   }
 
-  static getVariables(str) {
+  const getVariables = (str) => {
       const regex = /\[(.*?)\]/g;
       const variables = [];
       let m;
@@ -68,25 +62,22 @@ class NewTemplateDialog extends Component {
       return variables;
   }
 
-  render() {
-      const { fullScreen } = this.props;
-      const { open,templateId } = this.state;
-      const properties = NewTemplateDialog.getVariables(this.state.selectedText);
+      const properties = getVariables(selectedText);
       return (
           <div>
-              <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
+              <Button variant="fab" color="primary" aria-label="add" onClick={handleClickOpen}>
                   <AddIcon />
               </Button>
               <Dialog
                   fullScreen={fullScreen}
                   open={open}
-                  onClose={this.handleClose}
+                  onClose={handleClose}
                   aria-labelledby="responsive-dialog-title"
               >
                   <DialogTitle id="responsive-dialog-title">{'Create Smart Clause Template'}</DialogTitle>
                   <DialogContent>
                       <DialogContentText>
-              Create a new template from the selected text. Variables should be inside [square brackets].
+                        Create a new template from the selected text. Variables should be inside [square brackets].
                       </DialogContentText>
                       <TextField
                           autoFocus
@@ -96,11 +87,11 @@ class NewTemplateDialog extends Component {
                           type="string"
                           fullWidth
                           value = {templateId}
-                          onChange={this.handleTemplateIdChange}
+                          onChange={handleTemplateIdChange}
                       />
                       <Paper elevation={0}>
                           <Typography variant="title" component="h4">
-                Variables
+                            Variables
                           </Typography>
                       </Paper>
                       {properties.map((item, index) => {
@@ -119,17 +110,16 @@ class NewTemplateDialog extends Component {
                       }
                   </DialogContent>
                   <DialogActions>
-                      <Button onClick={this.handleCancel} color="primary">
-              Cancel
+                      <Button onClick={handleCancel} color="primary">
+                         Cancel
                       </Button>
-                      <Button onClick={this.handleOk} color="primary" autoFocus>
-              Ok
+                      <Button onClick={handleOk} color="primary" autoFocus>
+                        Ok
                       </Button>
                   </DialogActions>
               </Dialog>
           </div>
       );
-  }
 }
 
 NewTemplateDialog.propTypes = {
