@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import List, { ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
 import DescriptionIcon from '@material-ui/icons/Description';
 import IconButton from 'material-ui/IconButton';
@@ -13,21 +13,16 @@ import NewSmartClauseDialog from './NewSmartClauseDialog';
  *   <li>goto
  * </ul>
  */
-class SmartClauseList extends Component {
-    constructor(props) {
-        super(props);
+const SmartClauseList = (props) => {
 
-        this.state = {
-            items: [],
-            message: ''
-        };
-    }
+    const [items, setItems] = useState([]);
+    const [message, setMessage] = useState('');
 
-    componentDidMount() {
-        this.getBindings();
-    }
+    useEffect(() => {
+        getBindings();
+    }, [])
 
-  getBindings = () => {
+  const getBindings = () => {
       const bindings = window.Office.context.document.bindings;
       bindings.getAllAsync((asyncResult) => {
         if(asyncResult) {
@@ -44,39 +39,38 @@ class SmartClauseList extends Component {
                 }
                 newItems.push( {id: text, clauseId: id, templateId: template});
             }
-            this.setState({items: newItems});
+              setItems(newItems);
         }
         else {
-            this.setState({message: 'Could not get bindings.'});
+              setMessage('Could not get bindings.');
         }
     });
   }
 
-  removeBinding = (id) => {
+  const removeBinding = (id) => {
     const bindings = window.Office.context.document.bindings
     bindings.releaseByIdAsync(id, (asyncResult) => {
-      this.getBindings();
+      getBindings();
     });
   };
 
-  gotoBinding = (id) => {
+  const gotoBinding = (id) => {
       const document = window.Office.context.document;
       document.goToByIdAsync(id, window.Office.GoToType.Binding);
   };
 
-  render() {
     return (
-      <div className={this.props.theme.palette.background.paper}>
-        <NewSmartClauseDialog callback={this.getBindings}/>
+      <div className={props.theme.palette.background.paper}>
+        <NewSmartClauseDialog callback={getBindings}/>
         <List component="nav">
-          {this.state.items.map((item,index) => {
+          {items.map((item,index) => {
             return (
-              <ListItem button key={item.id} onClick={() => this.gotoBinding(item.id)}>
+              <ListItem button key={item.id} onClick={() => gotoBinding(item.id)}>
               <ListItemIcon>
                 <DescriptionIcon />
               </ListItemIcon>
               <ListItemText secondary={item.clauseId} primary={item.templateId}/>
-              <ListItemSecondaryAction onClick={() => this.removeBinding(item.id)}>
+              <ListItemSecondaryAction onClick={() => removeBinding(item.id)}>
                 <IconButton aria-label="Delete">
                   <DeleteIcon />
                 </IconButton>
@@ -86,6 +80,5 @@ class SmartClauseList extends Component {
         </List>
       </div>);
   }
-}
 
 export default withTheme()(SmartClauseList);
