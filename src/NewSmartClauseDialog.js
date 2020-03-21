@@ -57,7 +57,7 @@ class NewSmartClauseDialog extends Component {
 
   render() {
       const { fullScreen } = this.props;
-      const { open,clauseId,templateId } = this.state;
+      const { open } = this.state;
 
       return (
           <div>
