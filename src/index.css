@@ -29,3 +29,9 @@
 .dialog-content{
     min-height: 80vh;
 }
+
+.container {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}

@@ -34,8 +34,6 @@ const styles = theme => ({
         paddingBottom: '5%',
         textTransform: 'uppercase',
         fontWeight: 'bold',
-        position: 'sticky',
-        top: '0px'
     }
 });
 
@@ -52,6 +50,7 @@ const  TopNavigation = ({ classes }) => {
 
     return (
         <div className={classes.root}>
+            <div className="container">
             <AppBar position="static" className={classes.appbar}>
         Cicero Word Add In
             </AppBar>
@@ -61,6 +60,7 @@ const  TopNavigation = ({ classes }) => {
                     <Tab label="Templates" icon={<CodeIcon />} />
                 </Tabs>
             </AppBar>
+            </div>
             {value === 0 && <TabContainer><SmartClauseList/></TabContainer>}
             {value === 1 && <TabContainer><TemplateList/></TabContainer>}
         </div>
