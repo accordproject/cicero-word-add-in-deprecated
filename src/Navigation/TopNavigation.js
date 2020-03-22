@@ -54,7 +54,7 @@ const  TopNavigation = ({ classes }) => {
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.appbar}>
-               <a target="_blank" href="https://www.accordproject.org/"><img src = {Icon} alt="logo-here"/></a>Cicero Word Add In
+               <a target="_blank" href="https://www.accordproject.org/" rel="noopener noreferrer"><img src = {Icon} alt="logo-here"/></a>Cicero Word Add In
             </AppBar>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} fullWidth>
