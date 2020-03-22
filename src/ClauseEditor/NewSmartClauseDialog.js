@@ -10,8 +10,9 @@ import Dialog, {
     DialogTitle,
     withMobileDialog,
 } from 'material-ui/Dialog';
-import './index.css';
+import '../index.css';
 import { Form, Field } from 'react-final-form';
+
 
 /**
  * Links the currently selected text to a Template - creating a Smart Clause.

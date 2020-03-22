@@ -6,8 +6,8 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
-import SmartClauseList from './SmartClauseList';
-import TemplateList from './TemplateList';
+import SmartClauseList from '../ClauseEditor/SmartClauseList';
+import TemplateList from '../TemplateEditor/TemplateList';
 
 
 function TabContainer(props) {
@@ -43,11 +43,12 @@ const styles = theme => ({
  * Manages the tabs across the top of the application
  */
 const  TopNavigation = ({ classes }) => {
-  
+
     const [value, setValue] = useState(0);
     const handleChange = (event, value) => {
         setValue( value );
     };
+
 
     return (
         <div className={classes.root}>
