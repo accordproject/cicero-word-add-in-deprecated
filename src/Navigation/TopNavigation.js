@@ -44,11 +44,12 @@ const styles = theme => ({
  * Manages the tabs across the top of the application
  */
 const  TopNavigation = ({ classes }) => {
-  
+
     const [value, setValue] = useState(0);
     const handleChange = (event, value) => {
         setValue( value );
     };
+
 
     return (
         <div className={classes.root}>
