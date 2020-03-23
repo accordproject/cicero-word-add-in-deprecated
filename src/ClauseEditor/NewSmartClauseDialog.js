@@ -10,7 +10,7 @@ import Dialog, {
     DialogTitle,
     withMobileDialog,
 } from 'material-ui/Dialog';
-import './index.css';
+import '../index.css';
 import { Form, Field } from 'react-final-form';
 
 /**
@@ -44,6 +44,12 @@ class NewSmartClauseDialog extends Component {
       this.setState({ open: false });
   };
 
+
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter')
+        this.handleOk();
+  }
+  
   handleOk = (values) => {
     if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
       const Office = window.Office;
@@ -58,7 +64,7 @@ class NewSmartClauseDialog extends Component {
   render() {
       const { fullScreen } = this.props;
       const { open } = this.state;
-
+    
       return (
           <div>
               <Button variant="fab" color="primary" aria-label="add" onClick={this.handleClickOpen}>
@@ -116,10 +122,10 @@ class NewSmartClauseDialog extends Component {
                               </DialogContent>
                               <DialogActions>
                                   <Button onClick={this.handleCancel} color="primary">
-                    Cancel
+                                    Cancel
                                   </Button>
-                                  <Button type="submit" color="primary" autoFocus>
-                    Ok
+                                  <Button type="submit" color="primary" onKeyPress={this.handleKeyPress} autoFocus>
+                                    Ok
                                   </Button>
                               </DialogActions>
                           </form>)}

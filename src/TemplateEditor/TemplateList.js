@@ -54,10 +54,9 @@ const mockUpload = () => {
 const mockNewTemplate = () => {
 };
 
-
 /**
  * Adds the text of a template to the MS Word document.
- * @param {*} templateUri 
+ * @param {*} templateUri
  */
 const addToContract = async (templateIndex, templateUri) => {
 
