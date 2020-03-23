@@ -39,6 +39,12 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
       setIsOpen(false);
   };
 
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter')
+        this.handleOk();
+  }
+
   const handleOk = (values) => {
     if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
       const Office = window.Office;
@@ -109,7 +115,7 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
                                   <Button onClick={handleCancel} color="primary">
                                      Cancel
                                   </Button>
-                                  <Button type="submit" color="primary" autoFocus>
+                                  <Button type="submit" color="primary" onKeyPress={handleKeyPress} autoFocus>
                                     Ok
                                   </Button>
                               </DialogActions>
