@@ -52,7 +52,7 @@ const  TopNavigation = ({ classes }) => {
         <div className={classes.root}>
             <div className="container">
             <AppBar position="static" className={classes.appbar}>
-        Cicero Word Add In
+               Cicero Word Add In
             </AppBar>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} fullWidth>
