@@ -23,7 +23,7 @@ const NewTemplateDialog = ({ fullScreen }) => {
     const [templateId, setTemplateId] = useState('');
 
   const handleClickOpen = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
     const Office = window.Office;
     Office.context.document.getSelectedDataAsync(Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" }, (asyncResult) => {
@@ -34,11 +34,11 @@ const NewTemplateDialog = ({ fullScreen }) => {
   };
 
   const handleCancel = () => {
-      setIsOpen(isOpen);
+      setIsOpen(false);
   };
 
   const handleOk = () => {
-      setIsOpen(isOpen);
+      setIsOpen(false);
   };
 
   const handleTemplateIdChange = (event) => {

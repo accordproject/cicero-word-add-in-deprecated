@@ -26,7 +26,7 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
 
   const handleClickOpen = () => {
     const document = window.Office.context.document;
-    setIsOpen(!isOpen);
+    setIsOpen(true);
     document.getSelectedDataAsync(window.Office.CoercionType.Text,
         { valueFormat: "unformatted", filterType: "all" }, (asyncResult) => {
             if (asyncResult.status !== window.Office.AsyncResultStatus.Failed) {
