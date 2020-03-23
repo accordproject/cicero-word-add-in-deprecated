@@ -1,6 +1,6 @@
-# Accord Project Smart Clause Microsoft Word add-in
+# Accord Project Microsoft Word add-in
 
-Use the Accord Project Microsoft Word add-in to manage the Smart Clauses in your legal documents.
+Use the Accord Project Microsoft Word add-in to manage the clauses in your Smart Legal Contracts.
 
 ## Table of Contents
 * [Change History](#change-history)
@@ -12,7 +12,7 @@ Use the Accord Project Microsoft Word add-in to manage the Smart Clauses in your
 
 April 25, 2018:
 
-* Initial version: basic React based UI framework is in place. Binds text in the document to Smart Clauses. Introspects clauses to create templates (in progress).
+* Initial version: basic React based UI framework is in place. Binds text in the document to clauses. Introspects clauses to create templates (in progress).
 
 ## Prerequisites
 
