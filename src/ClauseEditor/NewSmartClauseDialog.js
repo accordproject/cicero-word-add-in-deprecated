@@ -136,6 +136,7 @@ class NewSmartClauseDialog extends Component {
   }
 }
 
+
 NewSmartClauseDialog.propTypes = {
     fullScreen: PropTypes.bool.isRequired,
     callback: PropTypes.func.isRequired
