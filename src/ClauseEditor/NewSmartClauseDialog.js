@@ -45,6 +45,11 @@ class NewSmartClauseDialog extends Component {
       this.setState({ open: false });
   };
 
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter')
+        this.handleOk();
+  }
+
   handleOk = (values) => {
     if(values.clauseId.trim() !== '' && values.templateId.trim() !== '') {
       const Office = window.Office;
@@ -117,10 +122,10 @@ class NewSmartClauseDialog extends Component {
                               </DialogContent>
                               <DialogActions>
                                   <Button onClick={this.handleCancel} color="primary">
-                    Cancel
+                                    Cancel
                                   </Button>
-                                  <Button type="submit" color="primary" autoFocus>
-                    Ok
+                                  <Button type="submit" color="primary" onKeyPress={this.handleKeyPress} autoFocus>
+                                    Ok
                                   </Button>
                               </DialogActions>
                           </form>)}
