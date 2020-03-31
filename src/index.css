@@ -35,3 +35,11 @@
     top: 0px;
     z-index: 1;
 }
+
+footer p a {
+    color: darkblue;
+}
+
+footer p a:hover {
+    color: red;
+}
