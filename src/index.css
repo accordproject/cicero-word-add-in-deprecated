@@ -13,13 +13,11 @@
     left: 0%;
     bottom: 0%;
     width: 100%;
-    background-color: #3f51b5;
-    color: white;
-    text-align: center;
-    font-style: italic;
-    font-size: smaller;
-    -moz-box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
-    box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
+    background-color: #E8E8E8;
+    color: black;
+    text-align: left;
+    font-size: 13px;
+    padding-left: 20px;
 }
 
 .error{
@@ -37,9 +35,9 @@
 }
 
 footer p a {
-    color: darkblue;
+    color: blue;
 }
 
 footer p a:hover {
-    color: red;
+    text-decoration: underline;
 }
