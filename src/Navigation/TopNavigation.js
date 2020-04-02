@@ -55,7 +55,6 @@ const  TopNavigation = ({ classes }) => {
     return (
         <div className={classes.root}>
             <div className="container">
-<<<<<<< HEAD
             <AppBar position="static" className={classes.appbar}>
         <Logo className="logo"/> 
         <div>Word Add in</div>
@@ -66,17 +65,6 @@ const  TopNavigation = ({ classes }) => {
                     <Tab label="Templates" icon={<CodeIcon />} />
                 </Tabs>
             </AppBar>
-=======
-                <AppBar position="static" className={classes.appbar}>
-                    Cicero Word Add In
-                </AppBar>
-                <AppBar position="static">
-                    <Tabs value={value} onChange={handleChange} fullWidth>
-                        <Tab label="Clause Template" icon={<NoteIcon />} />
-                        <Tab label="Templates" icon={<CodeIcon />} />
-                    </Tabs>
-                </AppBar>
->>>>>>> 733bbd4ac664872cdee5bfc050486e84b95042bf
             </div>
             <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
             <TabContainer value={value} index={1}><TemplateList/></TabContainer>
