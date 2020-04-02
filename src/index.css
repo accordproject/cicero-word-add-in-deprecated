@@ -1,8 +1,7 @@
 .template-list-loading-spinner {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .error label {
@@ -14,11 +13,31 @@
     left: 0%;
     bottom: 0%;
     width: 100%;
-    background-color: #5f34eb;
-    color: white;
-    text-align: center;
-    font-style: italic;
-    font-size: smaller;
-    -moz-box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
-    box-shadow: 0 -5px 6px rgba(0,0,0,0.5);
+    background-color: #E8E8E8;
+    color: black;
+    text-align: left;
+    font-size: 13px;
+    padding-left: 20px;
+}
+
+.error{
+    color: red;
+}
+
+.dialog-content{
+    min-height: 80vh;
+}
+
+.container {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
+
+footer p a {
+    color: #137abb;
+}
+
+footer p a:hover {
+    text-decoration: underline;
 }
