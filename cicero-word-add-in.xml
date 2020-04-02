@@ -124,14 +124,14 @@
       </bt:Urls>
       <!-- ShortStrings max characters==125. -->
       <bt:ShortStrings>
-        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Manage Smart Clauses" />
+        <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Manage Clause Template" />
         <bt:String id="Contoso.Group1Label" DefaultValue="Accord Project" />
-        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Manage the Accord Project Smart Clauses in your document." />
+        <bt:String id="Contoso.GetStarted.Title" DefaultValue="Manage the Accord Project Clause Templates in your document." />
       </bt:ShortStrings>
       <!-- LongStrings max characters==250. -->
       <bt:LongStrings>
-        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Manage Smart Clauses" />
-        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Smart Clause add-in loaded succesfully. Go to the HOME tab and click the 'Manage Smart Clauses' button to get started." />
+        <bt:String id="Contoso.TaskpaneButton.Tooltip" DefaultValue="Manage Clause Template" />
+        <bt:String id="Contoso.GetStarted.Description" DefaultValue="Clause Template add-in loaded succesfully. Go to the HOME tab and click the 'Manage Clause Template' button to get started." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

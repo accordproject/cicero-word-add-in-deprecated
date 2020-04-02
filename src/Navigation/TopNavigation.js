@@ -11,15 +11,18 @@ import TemplateList from '../TemplateEditor/TemplateList';
 
 
 function TabContainer(props) {
+    const { value, index } = props;
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
+        value === index ? <Typography component="div" style={{padding: 8*3}}>
+            {props.children }
+        </Typography> : null
     );
 }
 
 TabContainer.propTypes = {
     children: PropTypes.node.isRequired,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
 };
 
 const styles = theme => ({
@@ -51,18 +54,18 @@ const  TopNavigation = ({ classes }) => {
     return (
         <div className={classes.root}>
             <div className="container">
-            <AppBar position="static" className={classes.appbar}>
-               Cicero Word Add In
-            </AppBar>
-            <AppBar position="static">
-                <Tabs value={value} onChange={handleChange} fullWidth>
-                    <Tab label="Clause Template" icon={<NoteIcon />} />
-                    <Tab label="Templates" icon={<CodeIcon />} />
-                </Tabs>
-            </AppBar>
+                <AppBar position="static" className={classes.appbar}>
+                    Cicero Word Add In
+                </AppBar>
+                <AppBar position="static">
+                    <Tabs value={value} onChange={handleChange} fullWidth>
+                        <Tab label="Clause Template" icon={<NoteIcon />} />
+                        <Tab label="Templates" icon={<CodeIcon />} />
+                    </Tabs>
+                </AppBar>
             </div>
-            {value === 0 && <TabContainer><SmartClauseList/></TabContainer>}
-            {value === 1 && <TabContainer><TemplateList/></TabContainer>}
+            <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
+            <TabContainer value={value} index={1}><TemplateList/></TabContainer>
         </div>
     );
 };
