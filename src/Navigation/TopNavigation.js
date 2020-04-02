@@ -12,15 +12,18 @@ import {ReactComponent as Logo} from './assets/CICERO-WHITE-ON-TRANSPARANT-LOGOT
 
 
 function TabContainer(props) {
+    const { value, index } = props;
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
+        value === index ? <Typography component="div" style={{padding: 8*3}}>
+            {props.children }
+        </Typography> : null
     );
 }
 
 TabContainer.propTypes = {
     children: PropTypes.node.isRequired,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
 };
 
 const styles = theme => ({
@@ -52,6 +55,7 @@ const  TopNavigation = ({ classes }) => {
     return (
         <div className={classes.root}>
             <div className="container">
+<<<<<<< HEAD
             <AppBar position="static" className={classes.appbar}>
         <Logo className="logo"/> 
         <div>Word Add in</div>
@@ -62,9 +66,20 @@ const  TopNavigation = ({ classes }) => {
                     <Tab label="Templates" icon={<CodeIcon />} />
                 </Tabs>
             </AppBar>
+=======
+                <AppBar position="static" className={classes.appbar}>
+                    Cicero Word Add In
+                </AppBar>
+                <AppBar position="static">
+                    <Tabs value={value} onChange={handleChange} fullWidth>
+                        <Tab label="Clause Template" icon={<NoteIcon />} />
+                        <Tab label="Templates" icon={<CodeIcon />} />
+                    </Tabs>
+                </AppBar>
+>>>>>>> 733bbd4ac664872cdee5bfc050486e84b95042bf
             </div>
-            {value === 0 && <TabContainer><SmartClauseList/></TabContainer>}
-            {value === 1 && <TabContainer><TemplateList/></TabContainer>}
+            <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
+            <TabContainer value={value} index={1}><TemplateList/></TabContainer>
         </div>
     );
 };

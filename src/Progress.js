@@ -11,9 +11,8 @@ const Progress = (props) => {
                         <div>
                             <h1 style={{align:"center"}}>Cicero Word Add-in</h1>
                             <img src={Logo} alt={props.title} title={props.title}/>
-                            <h2>Please sideload your addin in Ms-word to see app body.</h2>
+                            <h2>Please <a href="https://docs.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins">sideload your add-in</a> in Ms-word to see app body.</h2>
                             <CircularProgress style={{ marginLeft:"40%"}} color="primary" />
-                            <h3><a href="https://docs.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins">Sideload Office Add-ins</a></h3>
                         </div>
                   </Grid>
               </MuiThemeProvider>
