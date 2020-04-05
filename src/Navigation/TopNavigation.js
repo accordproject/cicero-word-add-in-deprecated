@@ -37,6 +37,9 @@ const styles = theme => ({
         paddingBottom: '5%',
         textTransform: 'uppercase',
         fontWeight: 'bold',
+    },
+    tabsContainerItem: {
+        flex: 1
     }
 });
 
@@ -59,8 +62,8 @@ const  TopNavigation = ({ classes }) => {
                 </AppBar>
                 <AppBar position="static">
                     <Tabs value={value} onChange={handleChange} fullWidth>
-                        <Tab label="Clause Template" icon={<NoteIcon />} />
-                        <Tab label="Templates" icon={<CodeIcon />} />
+                        <Tab label="Clause Template" icon={<NoteIcon />} className={classes.tabsContainerItem} />
+                        <Tab label="Templates" icon={<CodeIcon />} className={classes.tabsContainerItem} />
                     </Tabs>
                 </AppBar>
             </div>
