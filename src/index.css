@@ -41,3 +41,12 @@ footer p a {
 footer p a:hover {
     text-decoration: underline;
 }
+
+.accord-project-logo {
+    margin: 100px 0px 100px 0px;
+}
+
+.cicero-logo {
+    width: 20%;
+    margin-top: 10%;
+}
