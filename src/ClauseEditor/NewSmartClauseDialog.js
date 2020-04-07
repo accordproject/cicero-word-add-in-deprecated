@@ -1,6 +1,7 @@
 import React,{useState, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
+import Fab from "@material-ui/core/Fab";
+import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from 'material-ui/TextField';
 import Dialog, {
@@ -58,9 +59,9 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
 
     return (
         <div>
-            <Button variant="fab" color="primary" aria-label="add" onClick={handleClickOpen}>
+            <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
                 <AddIcon />
-            </Button>
+            </Fab>
             <Dialog
                 fullScreen={fullScreen}
                 open={isOpen}
@@ -111,11 +112,11 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
                                     )}
                                 </Field>
                             </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleCancel} color="primary">
+                            <DialogActions className="dialogAction">
+                                <Button color="primary" variant="contained" onClick={handleCancel}>
                                      Cancel
                                 </Button>
-                                <Button type="submit" color="primary" onKeyPress={handleKeyPress} autoFocus>
+                                <Button type="submit" color="primary" variant="contained" onKeyPress={handleKeyPress} autoFocus>
                                     Ok
                                 </Button>
                             </DialogActions>

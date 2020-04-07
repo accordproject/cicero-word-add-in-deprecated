@@ -41,3 +41,7 @@ footer p a {
 footer p a:hover {
     text-decoration: underline;
 }
+
+.dialogAction {
+    padding-right: 10px;
+}
