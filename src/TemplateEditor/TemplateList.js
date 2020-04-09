@@ -81,8 +81,7 @@ const addToContract = async (templateIndex, templateUri) => {
         // console.log(JSON.stringify(dom, null, 2));
         const htmlTransformer = new HtmlTransformer();
         const html = htmlTransformer.toHtml(dom);
-        var blankParagraph = context.document.body.paragraphs.getLast().insertParagraph('', 'After');
-        blankParagraph.insertHtml(html, 'End');
+        context.document.getSelection().insertParagraph('', 'After').insertHtml(html, 'End');
         return context.sync();
     })
         .catch(function (error) {
