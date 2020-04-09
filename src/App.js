@@ -4,6 +4,7 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import { withTheme } from 'material-ui/styles'
 import Progress from './Progress.js';
 import Footer from './Footer';
+import PropTypes from 'prop-types';
 /**
  * Root component for the app
  */
@@ -21,6 +22,12 @@ const App = props => {
             </Fragment>
         </MuiThemeProvider>
     );
+};
+
+App.propTypes = {
+    isOfficeInitialized: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    theme: PropTypes.object.isRequired
 };
 
 

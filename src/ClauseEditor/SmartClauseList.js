@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withTheme } from 'material-ui/styles';
 import NewSmartClauseDialog from './NewSmartClauseDialog';
+import PropTypes from 'prop-types';
 
 /**
  * Lists the existing smart clauses in the document and actions to:
@@ -80,5 +81,9 @@ const SmartClauseList = (props) => {
         </List>
       </div>);
   }
+
+  SmartClauseList.propTypes = {
+    theme: PropTypes.object.isRequired
+};
 
 export default withTheme()(SmartClauseList);
