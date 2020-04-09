@@ -30,6 +30,14 @@
     z-index: 1;
 }
 
+.loading-screen-header {
+    text-align: center;
+}
+
+.loading-screen-circular-progress {
+    margin-left: 40%;
+}
+
 footer p a {
     color: #137abb;
 }
