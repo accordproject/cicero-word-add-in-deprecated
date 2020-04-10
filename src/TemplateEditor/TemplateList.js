@@ -73,20 +73,115 @@ const addToContract = async (templateIndex, templateUri) => {
         // console.log(sample);
         const clause = new Clause(template);
         clause.parse(sample);
-        // console.log(JSON.stringify(clause.getData(), null, 2));
+        // console.log(JSON.stringify(clause.getData(), null, 2))
         const sampleWrapped = await clause.draft({ wrapVariables: true });
         // console.log(sampleWrapped);
         const ciceroMarkTransformer = new CiceroMarkTransformer();
         const dom = ciceroMarkTransformer.fromMarkdown(sampleWrapped, 'json');
-        // console.log(JSON.stringify(dom, null, 2));
-        const htmlTransformer = new HtmlTransformer();
-        const html = htmlTransformer.toHtml(dom);
-        context.document.getSelection().insertParagraph('', 'After').insertHtml(html, 'End');
+        console.log(dom)
+
+        const nodes = {
+            computedVariable: 'org.accordproject.ciceromark.ComputedVariable',
+            heading: 'org.accordproject.commonmark.Heading',
+            item: 'org.accordproject.commonmark.Item',
+            list: 'org.accordproject.commonmark.List',
+            listVariable: 'org.accordproject.ciceromark.ListVariable',
+            paragraph: 'org.accordproject.commonmark.Paragraph',
+            softbreak: 'org.accordproject.commonmark.Softbreak',
+            text: 'org.accordproject.commonmark.Text',
+            variable: 'org.accordproject.ciceromark.Variable',
+        }
+
+        function InsertHeading(value) {
+            context.document.body.insertParagraph(value, "End").font.set({
+                color: 'black',
+                size: 13
+            });
+            context.document.body.insertParagraph(" ", "End");
+        }
+        
+        function InsertLineBreak() {
+            context.document.body.insertParagraph(" ", "End").font.set({
+                color: 'black',
+                size: 11
+            });
+        }
+
+        function InsertSoftBreak() {
+            context.document.body.insertText(" ", "End").font.set({
+                color: 'black',
+                size: 11
+            });
+        }
+
+        function InsertText(value) {
+            context.document.body.insertText(value, "End").font.set({
+                color: 'black',
+                size: 11
+            });
+        }
+
+        function InsertVariable(id, value) {
+            let variableText = context.document.body.insertText(value, "End");
+            variableText.insertContentControl().font.set({
+                color: 'blue',
+                size: 11
+            });
+            variableText.title = id;
+            variableText.tag = id;
+        }
+
+        dom.nodes.forEach((node) => {
+            let mainClass = node.$class;
+            node.nodes.forEach((subNode) => {
+                let subClass = subNode.$class;
+                let text = subNode.text;
+                let variable = subNode.value;
+                let id  = subNode.id;
+                if(mainClass === nodes.heading) {
+                    InsertHeading(text);
+                }
+                else if(mainClass === nodes.paragraph) {
+                    if(subClass === nodes.text) {
+                        InsertText(text);
+                    }
+                    else if(subClass === nodes.softbreak) {
+                        InsertSoftBreak();
+                    }
+                    else if(subClass === nodes.variable || subClass === nodes.computedVariable) {
+                        InsertVariable(id, variable);
+                    }                  
+                }
+                else if(mainClass === nodes.listVariable || mainClass === nodes.list) {
+                    if(subClass === nodes.item) {
+                        InsertLineBreak();
+                        subNode.nodes.forEach((itemNode) => {
+                            itemNode.nodes.forEach((rootNode) => {
+                                let rootNodeClass = rootNode.$class;
+                                let variable = rootNode.value;
+                                let id = rootNode.id;
+                                let text = rootNode.text;
+                                if(rootNodeClass === nodes.variable) {
+                                    InsertVariable(id, variable);
+                                } 
+                                else if (rootNodeClass === nodes.text) {
+                                    InsertText(text);
+                                }
+                            })
+                        })
+                    }
+                }
+            }) 
+        })
+        InsertLineBreak();
+        await context.sync()
+        let contentControl = context.document.contentControls;
+        context.load(contentControl, 'text');
         return context.sync();
     })
-        .catch(function (error) {
-            console.error('Error: ' + error);
-        });
+    .catch(function (error) {
+        console.log("Error: " + error);
+    });
 };
 
 export const LibraryComponent = (props) => {
