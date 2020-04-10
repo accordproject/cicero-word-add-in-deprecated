@@ -1,6 +1,5 @@
 import React,{useState, Fragment} from 'react';
 import PropTypes from 'prop-types';
-import Fab from "@material-ui/core/Fab";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from 'material-ui/TextField';
@@ -59,9 +58,9 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
 
     return (
         <div>
-            <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
-                <AddIcon />
-            </Fab>
+            <Button variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon />}>
+             Create new
+            </Button>
             <Dialog
                 fullScreen={fullScreen}
                 open={isOpen}
