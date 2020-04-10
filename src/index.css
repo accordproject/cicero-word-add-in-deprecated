@@ -4,10 +4,6 @@
     left: 50%;
 }
 
-.error label {
-    color: red;
-}
-
 .footer {
     position: fixed;
     left: 0%;
@@ -34,6 +30,15 @@
     z-index: 1;
 }
 
+.loading-screen-header {
+    text-align: center;
+    align: center;
+}
+
+.loading-screen-circular-progress {
+    margin-left: 40%;
+}
+
 footer p a {
     color: #137abb;
 }
@@ -41,6 +46,20 @@ footer p a {
 footer p a:hover {
     text-decoration: underline;
 }
- .logo {
+
+.logo {
      width: 20%;
  }
+
+.accord-project-logo {
+    margin: 100px 0px 100px 0px;
+}
+
+.cicero-logo {
+    width: 20%;
+    margin-top: 10%;
+}
+
+.dialogAction {
+    padding-right: 10px;
+}

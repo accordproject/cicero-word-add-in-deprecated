@@ -38,6 +38,9 @@ const styles = theme => ({
         paddingBottom: '5%',
         textTransform: 'uppercase',
         fontWeight: 'bold',
+    },
+    tabsContainerItem: {
+        flex: 1
     }
 });
 
@@ -54,9 +57,10 @@ const  TopNavigation = ({ classes }) => {
 
     return (
         <div className={classes.root}>
+          <div className="container">
             <AppBar position="static" className={classes.appbar}>
-        <Logo className="logo"/> 
-        <div>Word Add in</div>
+              <Logo className="logo"/> 
+              <div>Word Add in</div>
             </AppBar>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} fullWidth>
@@ -64,8 +68,9 @@ const  TopNavigation = ({ classes }) => {
                     <Tab label="Templates" icon={<CodeIcon />} />
                 </Tabs>
             </AppBar>
-            {value === 0 && <TabContainer><SmartClauseList/></TabContainer>}
-            {value === 1 && <TabContainer><TemplateList/></TabContainer>}
+          </div>
+          <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
+          <TabContainer value={value} index={1}><TemplateList/></TabContainer>
         </div>
     );
 };
