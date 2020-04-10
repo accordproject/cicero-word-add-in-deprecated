@@ -32,7 +32,7 @@
 
 .loading-screen-header {
     text-align: center;
-    align: "center";
+    align: center;
 }
 
 .loading-screen-circular-progress {
@@ -46,6 +46,10 @@ footer p a {
 footer p a:hover {
     text-decoration: underline;
 }
+
+.logo {
+     width: 20%;
+ }
 
 .accord-project-logo {
     margin: 100px 0px 100px 0px;

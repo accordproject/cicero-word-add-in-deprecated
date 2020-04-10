@@ -8,6 +8,7 @@ import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
 import SmartClauseList from '../ClauseEditor/SmartClauseList';
 import TemplateList from '../TemplateEditor/TemplateList';
+import {ReactComponent as Logo} from '../assets/CICERO-WHITE-ON-TRANSPARANT-LOGOTYPE.svg';
 
 
 function TabContainer(props) {
@@ -56,19 +57,20 @@ const  TopNavigation = ({ classes }) => {
 
     return (
         <div className={classes.root}>
-            <div className="container">
-                <AppBar position="static" className={classes.appbar}>
-                    Cicero Word Add In
-                </AppBar>
-                <AppBar position="static">
-                    <Tabs value={value} onChange={handleChange} fullWidth>
-                        <Tab label="Clause Template" icon={<NoteIcon />} className={classes.tabsContainerItem} />
-                        <Tab label="Templates" icon={<CodeIcon />} className={classes.tabsContainerItem} />
-                    </Tabs>
-                </AppBar>
-            </div>
-            <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
-            <TabContainer value={value} index={1}><TemplateList/></TabContainer>
+          <div className="container">
+            <AppBar position="static" className={classes.appbar}>
+              <Logo className="logo"/> 
+              <div>Word Add in</div>
+            </AppBar>
+            <AppBar position="static">
+                <Tabs value={value} onChange={handleChange} fullWidth>
+                    <Tab label="Clause Template" icon={<NoteIcon />} />
+                    <Tab label="Templates" icon={<CodeIcon />} />
+                </Tabs>
+            </AppBar>
+          </div>
+          <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
+          <TabContainer value={value} index={1}><TemplateList/></TabContainer>
         </div>
     );
 };
