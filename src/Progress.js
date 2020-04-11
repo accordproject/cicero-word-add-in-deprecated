@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from './assets/logo-filled.png';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { withTheme } from 'material-ui/styles'
 import {Grid, CircularProgress} from '@material-ui/core/';
