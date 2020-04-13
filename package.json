@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@accordproject/cicero-core": "^0.20.9",
+    "@accordproject/cicero-core": "^0.20.10",
     "@accordproject/cicero-ui": "^0.5.17",
     "@accordproject/markdown-cicero": "^0.10.3",
     "@accordproject/markdown-html": "^0.10.3",
