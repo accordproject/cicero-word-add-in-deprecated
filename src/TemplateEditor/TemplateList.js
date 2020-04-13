@@ -98,7 +98,6 @@ export const LibraryComponent = (props) => {
             const templateLibrary = new TemplateLibrary();
             const templateIndex = await templateLibrary
                 .getTemplateIndex({
-                    latestVersion: true,
                     ciceroVersion
                 });
             setTemplateIndex(templateIndex);
