@@ -63,3 +63,7 @@ footer p a:hover {
 .dialogAction {
     padding-right: 10px;
 }
+
+.MuiTypography-subheading-80, .MuiTypography-root-73 {
+    word-wrap: break-word;
+}
