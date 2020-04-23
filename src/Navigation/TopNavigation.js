@@ -6,8 +6,10 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 import SmartClauseList from '../ClauseEditor/SmartClauseList';
 import TemplateList from '../TemplateEditor/TemplateList';
+import AutoOpen from '../AutoOpen';
 import {ReactComponent as Logo} from '../assets/CICERO-WHITE-ON-TRANSPARANT-LOGOTYPE.svg';
 
 
@@ -50,6 +52,7 @@ const styles = theme => ({
 const  TopNavigation = ({ classes }) => {
 
     const [value, setValue] = useState(0);
+
     const handleChange = (event, value) => {
         setValue( value );
     };
@@ -66,11 +69,13 @@ const  TopNavigation = ({ classes }) => {
                 <Tabs value={value} onChange={handleChange} fullWidth>
                     <Tab label="Clause Template" icon={<NoteIcon />} />
                     <Tab label="Templates" icon={<CodeIcon />} />
+                    <Tab label="Auto Open" icon={<AutorenewIcon />} />
                 </Tabs>
             </AppBar>
           </div>
           <TabContainer value={value} index={0}><SmartClauseList/></TabContainer>
           <TabContainer value={value} index={1}><TemplateList/></TabContainer>
+          <TabContainer value={value} index={2}><AutoOpen/></TabContainer>
         </div>
     );
 };

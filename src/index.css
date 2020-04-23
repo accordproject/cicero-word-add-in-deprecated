@@ -67,3 +67,19 @@ footer p a:hover {
 .MuiTypography-subheading-80, .MuiTypography-root-73 {
     word-wrap: break-word;
 }
+
+.auto-open-heading{
+    text-align: center;
+    font-weight: 700;
+    color: #696969;
+}
+
+.auto-open {
+    font-size: 20px;
+    color: #A8A8A8;
+    font-weight: 100;
+}
+
+.auto-open .buttons {
+    padding-top: 40px;
+}
