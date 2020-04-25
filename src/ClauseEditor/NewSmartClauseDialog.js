@@ -12,7 +12,9 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import '../index.css';
 import { Form, Field } from 'react-final-form';
-
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from "@material-ui/core/FormControlLabel"
 
 /**
  * Links the currently selected text to a Template - creating a Smart Clause.
@@ -23,6 +25,7 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedText, setSelectedText] = useState('');
+    const [isChecked, setChecked] = useState(window.Office.context.document.settings.get("Office.AutoShowTaskpaneWithDocument"));
 
     const handleClickOpen = () => {
         const document = window.Office.context.document;
@@ -56,11 +59,29 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
         }
     };
 
+    const handleChange = () => {
+
+        if(isChecked === false) {
+            window.Office.context.document.settings.set("Office.AutoShowTaskpaneWithDocument", true); 
+            window.Office.context.document.settings.saveAsync();
+            setChecked(true);
+            return;
+        }
+
+        if(isChecked === true) {
+            window.Office.context.document.settings.set("Office.AutoShowTaskpaneWithDocument", false);
+            window.Office.context.document.settings.saveAsync();
+            setChecked(false);
+            return;
+        }
+    }
+
     return (
         <div>
             <Button variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon />}>
              Create new
-            </Button>
+            </Button> <br/><br/>
+            <Checkbox checked={isChecked} color="primary" onChange={handleChange} /><label className="autoOpen">AutoOpen Document</label>
             <Dialog
                 fullScreen={fullScreen}
                 open={isOpen}
