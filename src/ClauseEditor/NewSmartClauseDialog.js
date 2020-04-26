@@ -13,8 +13,6 @@ import Dialog, {
 import '../index.css';
 import { Form, Field } from 'react-final-form';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from "@material-ui/core/FormControlLabel"
 
 /**
  * Links the currently selected text to a Template - creating a Smart Clause.
@@ -69,7 +67,7 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
         }
 
         if(isChecked === true) {
-            window.Office.context.document.settings.set("Office.AutoShowTaskpaneWithDocument", false);
+            window.Office.context.document.settings.remove("Office.AutoShowTaskpaneWithDocument");
             window.Office.context.document.settings.saveAsync();
             setChecked(false);
             return;
@@ -81,7 +79,7 @@ const NewSmartClauseDialog = ({ fullScreen, callback }) => {
             <Button variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon />}>
              Create new
             </Button> <br/><br/>
-            <Checkbox checked={isChecked} color="primary" onChange={handleChange} /><label className="autoOpen">AutoOpen Document</label>
+            <Checkbox checked={isChecked} color="primary" onChange={handleChange} /><label className="autoOpen">AutoOpen Taskpane</label>
             <Dialog
                 fullScreen={fullScreen}
                 open={isOpen}
