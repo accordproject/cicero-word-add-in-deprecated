@@ -13,7 +13,6 @@
     color: black;
     text-align: left;
     font-size: 13px;
-    padding-left: 20px;
 }
 
 .error{
@@ -65,4 +64,12 @@ footer p a:hover {
 
 .MuiTypography-subheading-80, .MuiTypography-root-73 {
     word-wrap: break-word;
+}
+
+.footer-text {
+    padding-left: 20px;
+}
+
+.checkbox {
+    padding-left: 10px;
 }
