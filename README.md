@@ -44,7 +44,7 @@ To activate the task pane:
 
 ## For Developers
 
- For more information, see [Sideload Office Add-ins for testing](https://dev.office.com/docs/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins).
+ For more information, see [Sideload Office Add-ins for testing](https://docs.microsoft.com/en-gb/office/dev/add-ins/testing/test-debug-office-add-ins).
 
 To understand how the project files are set up, and to learn how to create your own project using these components, see [Use Office UI Fabric React in Office Add-ins](https://dev.office.com/docs/add-ins/design/using-office-ui-fabric-react).
 
