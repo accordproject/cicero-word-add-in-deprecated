@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -8,6 +8,8 @@ import NoteIcon from '@material-ui/icons/Note';
 import CodeIcon from '@material-ui/icons/Code';
 import SmartClauseList from '../ClauseEditor/SmartClauseList';
 import TemplateList from '../TemplateEditor/TemplateList';
+import OAuthConfig from '../OAuthConfig';
+import GraphClient from '../GraphClient';
 import {ReactComponent as Logo} from '../assets/CICERO-WHITE-ON-TRANSPARANT-LOGOTYPE.svg';
 
 
@@ -50,10 +52,46 @@ const styles = theme => ({
 const  TopNavigation = ({ classes }) => {
 
     const [value, setValue] = useState(0);
+    const [isAuthenticated, setAuthentication] = useState(false);
+    const [displayName, setDisplayName] = useState(null);
     const handleChange = (event, value) => {
         setValue( value );
     };
 
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            try {
+                const authResponse = await OAuthConfig.acquireTokenSilent({
+                    scopes: process.env.REACT_APP_SCOPES.split(','),
+                });
+                const data = await GraphClient(authResponse.accessToken).api('/me').get();
+                setDisplayName(data.displayName);
+                setAuthentication(true);
+            }
+            catch (error) {
+                console.info(error.message);
+            }
+        }
+        checkAuthentication();
+    }, [isAuthenticated])
+
+    const login = async () => {
+        try {
+            await OAuthConfig.loginPopup({
+                scopes: process.env.REACT_APP_SCOPES.split(','),
+                prompt: 'consent',
+            })
+            const authResponse = await OAuthConfig.acquireTokenSilent({
+                scopes: process.env.REACT_APP_SCOPES.split(','),
+            });
+            const data = await GraphClient(authResponse.accessToken).api('/me').get();
+            setDisplayName(data.displayName);
+            setAuthentication(true);
+        }
+        catch (error) {
+            console.info(error.message);
+        }
+    }
 
     return (
         <div className={classes.root}>
@@ -61,6 +99,10 @@ const  TopNavigation = ({ classes }) => {
             <AppBar position="static" className={classes.appbar}>
               <Logo className="logo"/> 
               <div>Word Add in</div>
+              {isAuthenticated ?
+                `Welcome ${displayName}!` :
+                <button onClick={login}>Login</button>
+              }
             </AppBar>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} fullWidth>
